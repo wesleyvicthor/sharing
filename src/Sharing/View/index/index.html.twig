@@ -1,0 +1,48 @@
+{% extends 'main.html.twig' %}
+{% block stylesheets %}
+	<link rel="stylesheet" type="text/css" href="static/css/index/main.css">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Knewave|Fascinate|Titan+One">
+{% endblock %}
+
+{% block container %}
+	<div class="span4 infos-wrapper">
+		<ul class="midia-list">
+			<li class="media">
+				<a class="pull-left" href="#">
+					<img class="media-object" src="http://placehold.it/64x64">
+				</a>
+				<div class="media-body">
+					<h4 class="media-heading">Wesley Victhor</h4>
+					Analise e Desenvolvimento de Sistemas na UNIFIEO
+				</div>
+			</li>
+		</ul>
+	</div>
+	<div class="span5 main-wrapper">
+		<div class="span6 main">
+			<div class="tabbable main-nav">
+				<ul class="nav nav-pills">
+					<li class="active"><a href="#inbox" data-toggle="tab">Inbox</a></li>
+					<li><a href="#tab2" data-toggle="tab">Arquivos</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="inbox">
+						<div class=""></div>
+						<div class="input-box-wrapper">
+							<textarea></textarea>
+						</div>
+					</div>
+					<div class="tab-pane" id="tab2">
+						arquivos
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="span2 groups">
+			<ul class="nav nav-pills nav-stacked">
+				<li>TADS</li>
+				<li>TCC</li>
+			</ul>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+.infos-wrapper, .main-wrapper {
+	height: 100%;
+}
+
+.infos-wrapper {
+	background-color: #01070C;
+	padding-top: 20px;
+}
+.main-wrapper {
+	margin-left: 0px;
+	overflow: hidden;
+	width: 640px;
+}
+.main {
+	margin-top: 20px;
+	margin-left: 10px;
+}
+.main-nav {
+	font-family: Segoe UI Web Semibold;
+}
+#inbox {
+	background: rgba(124, 111, 111, 0.08);
+}
+.input-box-wrapper {
+
+}
+#inbox div textarea {
+	border-radius: 0px;
+	width: 90%;
+	resize: none;
+}
+.groups ul {
+	width: 72px;
+	text-shadow: 1px 1px 0px #ebebeb;
+    filter: dropshadow(color=#ebebeb, offx=1, offy=1);
+    font-family: Segoe UI Web Regular;
+}
+.groups ul li {
+	text-align: center;
+	background: #ccc;
+	margin-top: 3px;
+	padding: 10px;
+}
+.groups {
+	margin-top: 60px;
+}
