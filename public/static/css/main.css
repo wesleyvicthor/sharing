@@ -12,6 +12,8 @@ body {
     outline: none;
 }
 
+input { font-family: Segoe UI Web Light; }
+button { font-family: Segoe UI Web Regular; }
 .container,
 .row { height: inherit; }
 .brand {
