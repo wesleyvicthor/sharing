@@ -23,3 +23,8 @@ button { font-family: Segoe UI Web Regular; }
 	position: static;
 }
 
+.brand-font {
+    font-family: Comfortaa;
+    font-weight: 300;
+}
+

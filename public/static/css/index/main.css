@@ -6,6 +6,9 @@
 	background-color: #01070C;
 	padding-top: 20px;
 }
+.main .tab-content {
+	height: 500px;
+}
 .main-wrapper {
 	margin-left: 0px;
 	overflow: hidden;
@@ -19,15 +22,27 @@
 	font-family: Segoe UI Web Semibold;
 }
 #inbox {
-	background: rgba(124, 111, 111, 0.08);
+	position: relative;
 }
 .input-box-wrapper {
-
+	padding: 5px;
+}
+#inbox div textarea:focus {
+	box-shadow: none;
+	border-color: rgba(2, 184, 255, 0.25); 
 }
 #inbox div textarea {
 	border-radius: 0px;
-	width: 90%;
+	border: solid 1px rgba(204, 204, 204, 0.08);
+	width: 435px;
 	resize: none;
+	margin: 0px;
+	background: rgba(124, 111, 111, 0.08);
+	color: #7C7C7C;
+}
+.msgs-content {
+	height: 400px;
+	background: rgba(124, 111, 111, 0.08);
 }
 .groups ul {
 	width: 72px;
