@@ -1,6 +1,6 @@
 <?php
 
-error_reporting(-1);
+error_reporting(E_ALL ^ E_NOTICE);
 date_default_timezone_set('UTC');
 
 if (!($autoload = @include __DIR__ . '/vendor/autoload.php')) {

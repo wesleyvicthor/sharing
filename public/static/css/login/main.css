@@ -5,6 +5,8 @@ body {
 }
 
 .form-signin {
+    overflow: hidden;
+    height: 220px;
     max-width: 300px;
     padding: 19px 29px 29px;
     margin: 0 auto 20px;

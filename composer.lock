@@ -1,5 +1,5 @@
 {
-    "hash": "fd4259a25101792e6d57aa8dd22b58a5",
+    "hash": "bb7153c131b964fe660dff14a5b57758",
     "packages": [
         {
             "name": "Respect/Data",
@@ -113,21 +113,21 @@
         },
         {
             "name": "Respect/Rest",
-            "version": "0.5.1",
+            "version": "dev-develop",
             "source": {
                 "type": "git",
                 "url": "git://github.com/Respect/Rest.git",
-                "reference": "0.5.1"
+                "reference": "b5fce2700edf21721123b7135d3b84f090111b82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://github.com/Respect/Rest/zipball/0.5.1",
-                "reference": "0.5.1",
+                "url": "https://github.com/Respect/Rest/zipball/b5fce2700edf21721123b7135d3b84f090111b82",
+                "reference": "b5fce2700edf21721123b7135d3b84f090111b82",
                 "shasum": ""
             },
-            "time": "2012-09-16 23:16:41",
+            "time": "1348353292",
             "type": "library",
-            "installation-source": "dist",
+            "installation-source": "source",
             "autoload": {
                 "psr-0": {
                     "Respect\\Rest": "library/"
@@ -383,6 +383,7 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
+        "respect/rest": 20,
         "respect/relational": 20,
         "respect/data": 20
     }

@@ -12,4 +12,9 @@ class Index extends Controller
 			echo $e->getMessage();
 		}
 	}
+
+	public function post()
+	{
+		$this->get();
+	}
 }

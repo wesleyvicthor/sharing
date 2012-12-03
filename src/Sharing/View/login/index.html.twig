@@ -5,11 +5,29 @@
 {% block main_nav %}{% endblock %}
 
 {% block container %}
-    <form class="form-signin">
-        <h2 class="form-signin-heading brand-font">Sharing</h2>
-        <input type="text" class="input-block-level" placeholder="Email">
-        <input type="password" class="input-block-level" placeholder="Senha">
-        <button class="btn btn-large btn-primary" type="submit">Aluno</button>
-        <button class="btn btn-large btn-primary" style="float: right" type="submit">Professor</button>
-    </form>
+    <div class="form-signin">
+    	<div>
+	    	<div class="messages"></div>
+		    <form>
+		        <h2 class="form-signin-heading brand-font">Sharing</h2>
+		        <input name="email" type="text" class="input-block-level" placeholder="Email">
+		        <input name="passw" type="password" class="input-block-level" placeholder="Senha">
+		    </form>
+		    <button id="user" class="btn btn-large btn-primary">Aluno</button>
+		    <button id="teacher" class="btn btn-large btn-primary" style="float: right">Professor</button>
+    	</div>
+    	<div>
+    		<div class="messages"></div>
+		    <form>
+		        <h2 class="form-signin-heading">Cadastrar alunos</h2>
+		        <input name="group-name" type="text" class="input-block-level" placeholder="Nome do grupo">
+		        <input name="email-list" type="text" class="input-block-level" placeholder="Lista de emails">
+		    </form>
+		    <button id="cadastrar" class="btn btn-large btn-primary">Cadastrar</button>
+    	</div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript" src="static/js/login/index.js"></script>
 {% endblock %}

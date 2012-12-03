@@ -5,16 +5,23 @@ use Respect\Rest\Routable;
 
 class Controller implements Routable
 {
-	protected $templateEngine;
+	protected $container;
+	const ERROR = 00;
+	const SUCCESS = 01;
 
-	public function __construct($templateEngine = null)
+	public function __construct($container = null)
 	{
-		$this->templateEngine = $templateEngine;
+		$this->container = $container;
 	}
 
 	public function render($view, array $variables = array())
 	{
-		echo $this->templateEngine->render($view, $variables);
+		echo $this->container->get('twig')->render($view, $variables);
+	}
+
+	public function showMessage($message, $level = self::SUCCESS)
+	{
+		return array('message' => $message, 'type' => $level);
 	}
 
 	public function getController($className)

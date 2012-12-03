@@ -17,9 +17,13 @@ class Auth
 	{
 		if (empty($_SESSION['user.email'])
 			|| empty($_SESSION['user.passw'])) {
-			
-			return $this->container->route['login'];
+			return header('Location: /login');
 		}
 		return true;
+	}
+
+	public function authenticate($user, $passw)
+	{
+
 	}
 }
