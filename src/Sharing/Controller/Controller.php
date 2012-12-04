@@ -2,6 +2,7 @@
 
 namespace Sharing\Controller;
 use Respect\Rest\Routable;
+use Sharing\Model\Container;
 
 class Controller implements Routable
 {
@@ -9,7 +10,7 @@ class Controller implements Routable
 	const ERROR = 00;
 	const SUCCESS = 01;
 
-	public function __construct($container = null)
+	public function __construct(Container $container = null)
 	{
 		$this->container = $container;
 	}

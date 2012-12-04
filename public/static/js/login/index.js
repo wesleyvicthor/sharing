@@ -4,6 +4,26 @@
 		window.location.href = path;
 	}
 
+	function populateUniversities()
+	{
+		$.get('/universities', function (result) {
+
+			var universities = [];
+			$.each(result, function (university) {
+				universities.push($('<option/>').attr({
+					value: university.id
+				}).text(university.name));
+			});
+
+			$('#universities').html(universities.join());
+		}, 'json');
+	}
+
+	public function populateCourses()
+	{
+		
+	}
+
 	function newUser(data) 
 	{
 		$('.form-signin div:first').fadeOut('fast');
