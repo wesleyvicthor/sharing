@@ -4,9 +4,23 @@
 		window.location.href = path;
 	}
 
-	function newUser(input) 
+	function newUser(data) 
 	{
 		$('.form-signin div:first').fadeOut('fast');
+
+		var params = $('#cadastrar-form').serialize()
+		params += '&email='+ data.email +'&passw='+ data.passw +'&type='+ data.type;
+		$('#cadastrar').on('click', function () {
+			$.ajax({
+				data: params
+				type: 'post',
+				success: function (result) {
+					if (result.redirect) {
+						return redirect(result.redirect);
+					}
+				}
+			});
+		});
 	}
 
 	$('.form-signin button').on('click', function (event) {
@@ -22,24 +36,17 @@
 					return newUser(result);
 				}
 
-				var messages = '';
 				if (result.redirect) {
-					redirect(result.redirect);
+					return redirect(result.redirect);
 				}
+
+				var messages = '';
 				if (result.type === 0) {
 					$.map(result.message, function (message) {
 						if (message != '') {
 							messages += '- ' + message + "<br />";
 						}
 					});
-				}
-
-				if (result.redirect !== undefined) {
-					window.location.href = result.redirect;
-				}
-
-				if (this.statusCode = 401) {
-					newUser(result);
 				}
 
 				$('.messages').empty();

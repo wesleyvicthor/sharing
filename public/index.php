@@ -19,6 +19,8 @@ $container->add('login', $login);
 
 $auth = new \Sharing\Model\Auth($container);
 
+$router->any('/cadastrar', 'Sharing\Controller\Register', array($container));
+
 $root = $router->any('/', 'Sharing\Controller\Index', array($container))
 	->by(array($auth, 'isGranted'));
 $container->add('root', $root);
