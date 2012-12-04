@@ -7,7 +7,6 @@
 	function populateUniversities()
 	{
 		$.get('/universities', function (result) {
-
 			var universities = [];
 			$.each(result, function (university) {
 				universities.push($('<option/>').attr({
@@ -19,9 +18,17 @@
 		}, 'json');
 	}
 
-	public function populateCourses()
+	public function populateCourses(university_id)
 	{
-		
+		$.get('/courses', {university: university_id}, function (result) {
+			var courses = [];
+			$.each(result, function (course) {
+				courses.push($('<option/>').attr({
+					value: course.id
+				}).text(course.name));
+			});
+			$('<select />').attr('name','course').html(courses.join()).insertAfter('#universities');
+		}, 'json');
 	}
 
 	function newUser(data) 
