@@ -8,26 +8,26 @@
 	{
 		$.get('/universities', function (result) {
 			var universities = [];
-			$.each(result, function (university) {
-				universities.push($('<option/>').attr({
-					value: university.id
-				}).text(university.name));
+			$.each(result, function (i, university) {
+				universities.push('<option id="'+university.id+'">'+university.name+'</option>');
 			});
 
-			$('#universities').html(universities.join());
+			$('select[name=university]').html(universities.join());
 		}, 'json');
+
+		$('select[name=university]').on('change', function () {
+			
+		});
 	}
 
-	public function populateCourses(university_id)
+	function populateCourses(university_id)
 	{
 		$.get('/courses', {university: university_id}, function (result) {
 			var courses = [];
-			$.each(result, function (course) {
-				courses.push($('<option/>').attr({
-					value: course.id
-				}).text(course.name));
+			$.each(result, function (i, course) {
+				courses.push('<option id="'+course.id+'">'+course.name+'</option>');
 			});
-			$('<select />').attr('name','course').html(courses.join()).insertAfter('#universities');
+			$('<select />').attr('name','course').html(courses.join()).insertAfter('select[name=university]');
 		}, 'json');
 	}
 
@@ -39,7 +39,7 @@
 		params += '&email='+ data.email +'&passw='+ data.passw +'&type='+ data.type;
 		$('#cadastrar').on('click', function () {
 			$.ajax({
-				data: params
+				data: params,
 				type: 'post',
 				success: function (result) {
 					if (result.redirect) {

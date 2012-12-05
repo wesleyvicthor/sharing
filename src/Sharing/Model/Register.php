@@ -54,7 +54,7 @@ class Register
 	public function getUniversities()
 	{
 		$mapper = $this->container->get('mapper');
-		$universities = $mapper->university->fetchAll(array());
+		$universities = $mapper->university->fetchAll();
 		return $universities;
 	}
 
@@ -62,11 +62,11 @@ class Register
 	{
 		$mapper = $this->container->get('mapper');
 
-		$coursesUniversity = $mapper->courseUniversity(array('university_id' => (int) $universityId))->fetchAll(array());
-
+		$coursesUniversity = $mapper->courseUniversity(array('university_id' => (int) $universityId))->fetchAll();
 		$courses = array();
+
 		foreach ($coursesUniversity as $courseUniversity) {
-			$courses[] = $mapper->course(array('id' => $courseUniversity['id']))->fetch(array());
+			$courses[] = $mapper->course(array('id' => (int) $courseUniversity->course_id))->fetch();
 		}
 		return $courses;
 	}

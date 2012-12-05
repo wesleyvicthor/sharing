@@ -15,7 +15,7 @@ class Login extends Controller
 		}
 	}
 
-	public function post()
+	public function auth()
 	{
 		$email = $_POST['email'];
 		$passw = $_POST['passw'];

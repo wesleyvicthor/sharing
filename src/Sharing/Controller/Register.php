@@ -3,6 +3,7 @@
 namespace Sharing\Controller;
 
 use Respect\Validation\Validator as v;
+use Sharing\Model\Container;
 
 class Register extends Controller
 {
@@ -17,7 +18,7 @@ class Register extends Controller
 	public function getCourses()
 	{
 		$courses = $this->register->getCoursesByUniversityId($_GET['university']);
-		return json_encode($universities);
+		return json_encode($courses);
 	}
 
 	public function getUniversities()
@@ -26,7 +27,7 @@ class Register extends Controller
 		return json_encode($universities);
 	}
 
-	public function post()
+	public function register()
 	{
 		$this->register->newTeacher($_POST);
 	}

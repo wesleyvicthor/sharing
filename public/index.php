@@ -10,16 +10,19 @@ $container = new \Sharing\Model\Container();
 $container->add('mapper', $mapper);
 $container->add('twig', $twig);
 
-
 $loginController = new \Sharing\Controller\Login($container);
 
 $login = $router->get('/login', array($loginController, 'index'));
-$router->post('/login', array($loginController, 'post'));
+$router->post('/login', array($loginController, 'auth'));
 $container->add('login', $login);
 
 $auth = new \Sharing\Model\Auth($container);
 
-$router->any('/cadastrar', 'Sharing\Controller\Register', array($container));
+$registerController = new \Sharing\Controller\Register($container);
+
+$router->any('/cadastrar', array($registerController, 'register'));
+$router->get('/universities', array($registerController, 'getUniversities'));
+$router->get('/courses', array($registerController, 'getCourses'));
 
 $root = $router->any('/', 'Sharing\Controller\Index', array($container))
 	->by(array($auth, 'isGranted'));
