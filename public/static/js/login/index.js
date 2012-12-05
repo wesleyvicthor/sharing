@@ -77,7 +77,7 @@
 				}
 
 				$('.messages').empty();
-				$('.messages').html($('<div class="alert alert-error"><div>').html(messages).fadeIn('slow'));
+				$('.messages').html($('<div class="alert alert-error"><div>').html(messages).show());
 			},
 			dataType: 'json'
 		});
