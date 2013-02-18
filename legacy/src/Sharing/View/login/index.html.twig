@@ -1,0 +1,33 @@
+{% extends 'main.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="static/css/login/main.css">
+{% endblock %}
+{% block main_nav %}{% endblock %}
+
+{% block container %}
+    <div class="form-signin">
+    	<div>
+		    <form id="signin-form">
+		        <h2 class="form-signin-heading brand-font">Sharing</h2>
+		        <input name="email" type="text" class="input-block-level" placeholder="Email">
+		        <input name="passw" type="password" class="input-block-level" placeholder="Senha">
+		    </form>
+		    <button id="user" class="btn btn-large btn-primary">Aluno</button>
+		    <button id="teacher" class="btn btn-large btn-primary" style="float: right">Professor</button>
+    	</div>
+    	<div>
+		    <form id="cadastrar-form">
+		        <h2 class="form-signin-heading">Cadastrar alunos</h2>
+		        <select name="university" class="input-block-level"></select>
+		        <input name="group-name" type="text" class="input-block-level" placeholder="Nome do grupo">
+		        <input name="email-list" type="text" class="input-block-level" placeholder="Lista de emails">
+		    </form>
+		    <button id="cadastrar" class="btn btn-large btn-primary">Cadastrar</button>
+    	</div>
+    </div>
+    <div class="messages"></div>
+{% endblock %}
+
+{% block javascripts %}
+	<script type="text/javascript" src="static/js/login/index.js"></script>
+{% endblock %}

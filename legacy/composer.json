@@ -1,0 +1,22 @@
+{
+    "name": "wesley/sharing",
+    "description": "Sharing - TCC project",
+    "require": {
+        "respect/rest": "dev-develop",
+        "respect/validation": "0.4.4",
+        "respect/relational": "dev-master",
+        "respect/data": "dev-master",
+        "twig/twig": "v1.11.1"
+    },
+    "autoload" : {
+        "psr-0": {
+            "Sharing": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Wesley Victhor Mendes",
+            "email": "w.v.mendes.s@gmail.com"
+        }
+    ]
+}

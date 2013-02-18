@@ -1,0 +1,390 @@
+{
+    "hash": "bb7153c131b964fe660dff14a5b57758",
+    "packages": [
+        {
+            "name": "Respect/Data",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Respect/Data",
+                "reference": "4b81060d2394dd3860c33f8e77090c3e221730b0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/Respect/Data/archive/4b81060d2394dd3860c33f8e77090c3e221730b0.zip",
+                "reference": "4b81060d2394dd3860c33f8e77090c3e221730b0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "time": "1348012365",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Respect\\Data": "library"
+                }
+            },
+            "license": [
+                "New BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Alexandre Gomes Gaigalas",
+                    "email": "alexandre@gaigalas.net"
+                },
+                {
+                    "name": "Augusto Pascutti",
+                    "email": "augusto@phpsp.org.br"
+                }
+            ],
+            "description": "Persistence simplified.",
+            "homepage": "https://github.com/Respect/Data",
+            "keywords": [
+                "database",
+                "persistence",
+                "respect"
+            ]
+        },
+        {
+            "name": "Respect/Relational",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Respect/Relational",
+                "reference": "020adc57ff097a3270f9c6b0e507b1d998ed3b68"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/Respect/Relational/zipball/020adc57ff097a3270f9c6b0e507b1d998ed3b68",
+                "reference": "020adc57ff097a3270f9c6b0e507b1d998ed3b68",
+                "shasum": ""
+            },
+            "require": {
+                "respect/data": ">=0.1.5"
+            },
+            "time": "1336256121",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Respect\\Relational": "library/"
+                }
+            },
+            "license": [
+                "BSD Style"
+            ],
+            "authors": [
+                {
+                    "name": "Henrique Moody",
+                    "email": "henriquemoody@gmail.com",
+                    "homepage": "http://henriquemoody.com/"
+                },
+                {
+                    "name": "Alexandre Gomes Gaigalas",
+                    "email": "alexandre@gaigalas.net"
+                },
+                {
+                    "name": "Alexandre Gaigalas",
+                    "email": "alganet@alganet-workstation.(none)"
+                },
+                {
+                    "name": "Rogerio Prado de Jesus",
+                    "email": "rogeriopradoj@gmail.com"
+                },
+                {
+                    "name": "Claudson Oliveira",
+                    "email": "claudsonweb@gmail.com"
+                },
+                {
+                    "name": "Kinn Coelho Julião",
+                    "email": "kinncj@gmail.com",
+                    "homepage": "http://kinncj.com.br",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Thiago Rigo",
+                    "email": "thiagophx@gmail.com"
+                }
+            ],
+            "description": "Fluent Database Toolkit",
+            "homepage": "http://respect.li"
+        },
+        {
+            "name": "Respect/Rest",
+            "version": "dev-develop",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/Respect/Rest.git",
+                "reference": "b5fce2700edf21721123b7135d3b84f090111b82"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/Respect/Rest/zipball/b5fce2700edf21721123b7135d3b84f090111b82",
+                "reference": "b5fce2700edf21721123b7135d3b84f090111b82",
+                "shasum": ""
+            },
+            "time": "1348353292",
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Respect\\Rest": "library/"
+                }
+            },
+            "license": [
+                "BSD Style"
+            ],
+            "authors": [
+                {
+                    "name": "Henrique Moody",
+                    "email": "henriquemoody@gmail.com",
+                    "homepage": "http://henriquemoody.com/"
+                },
+                {
+                    "name": "Alexandre Gomes Gaigalas",
+                    "email": "alexandre@gaigalas.net"
+                },
+                {
+                    "name": "Augusto Pascutti",
+                    "email": "contato@augustopascutti.com"
+                },
+                {
+                    "name": "Alexandre Gaigalas",
+                    "email": "alganet@alganet-workstation.(none)"
+                },
+                {
+                    "name": "kleberhs007",
+                    "email": "kleberhs007@yahoo.com"
+                },
+                {
+                    "name": "Leandro",
+                    "email": "lleitep3@gmail.com"
+                },
+                {
+                    "name": "Rogerio Prado de Jesus",
+                    "email": "rogeriopradoj@gmail.com"
+                },
+                {
+                    "name": "Alexandre Gaigalas",
+                    "email": "alexandre@gaiaglas.net"
+                },
+                {
+                    "name": "Anderson Casimiro",
+                    "email": "duodraco@duo.draco"
+                },
+                {
+                    "name": "Anderson Casimiro",
+                    "email": "duodraco@gmail.com"
+                },
+                {
+                    "name": "Augusto Pascutti",
+                    "email": "augusto@phpsp.org.br"
+                },
+                {
+                    "name": "Ben Ramsey",
+                    "email": "ben@benramsey.com"
+                },
+                {
+                    "name": "eduardomarcate",
+                    "email": "eduardo@marcate.info"
+                },
+                {
+                    "name": "Eduardo M. Garcia",
+                    "email": "eduardo@debian.elam"
+                },
+                {
+                    "name": "Nick Rawe",
+                    "email": "nickrawe2@gmail.com"
+                },
+                {
+                    "name": "Pablo Lacerda de Miranda",
+                    "email": "pablolmiranda@gmail.com"
+                },
+                {
+                    "name": "wesleyvicthor",
+                    "email": "w.v.mendes.s@gmail.com"
+                }
+            ],
+            "description": "Thin controller for RESTful applications"
+        },
+        {
+            "name": "Respect/Validation",
+            "version": "0.4.4",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/Respect/Validation.git",
+                "reference": "0.4.4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/Respect/Validation/zipball/0.4.4",
+                "reference": "0.4.4",
+                "shasum": ""
+            },
+            "time": "2012-04-24 23:52:45",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Respect\\Validation": "library/"
+                }
+            },
+            "license": [
+                "BSD Style"
+            ],
+            "authors": [
+                {
+                    "name": "Henrique Moody",
+                    "email": "henriquemoody@gmail.com",
+                    "homepage": "http://henriquemoody.com/"
+                },
+                {
+                    "name": "Alexandre Gaigalas",
+                    "email": "alexandre@gaigalas.net"
+                },
+                {
+                    "name": "Augusto Pascutti",
+                    "email": "contato@augustopascutti.com"
+                },
+                {
+                    "name": "Alexandre (@alganet)",
+                    "email": "alganet@alganet-laptop.(none)"
+                },
+                {
+                    "name": "Alexandre Gaigalas",
+                    "email": "alganet@alganet-workstation.(none)"
+                },
+                {
+                    "name": "Carlos André Ferrari",
+                    "email": "andre@andre.(none)"
+                },
+                {
+                    "name": "Carlos André Ferrari",
+                    "email": "caferrari@gmail.com"
+                },
+                {
+                    "name": "Devin Torres",
+                    "email": "devin@devintorres.com"
+                },
+                {
+                    "name": "Emerson Carvalho",
+                    "email": "emerson.broga@gmail.com"
+                },
+                {
+                    "name": "Fábio da Silva Ribeiro",
+                    "email": "fabiorphp@gmail.com"
+                },
+                {
+                    "name": "Jair Henrique",
+                    "email": "jair.henrique@gmail.com"
+                },
+                {
+                    "name": "Jayson Reis",
+                    "email": "jayson.reis@sabbre.com.br"
+                },
+                {
+                    "name": "Jayson Reis",
+                    "email": "santosdosreis@gmail.com"
+                },
+                {
+                    "name": "Jean Pimentel",
+                    "email": "jeanfap@gmail.com"
+                },
+                {
+                    "name": "kleberhs007",
+                    "email": "kleberhs007@yahoo.com"
+                },
+                {
+                    "name": "Leandro",
+                    "email": "lleitep3@gmail.com"
+                },
+                {
+                    "name": "Marcelo Araujo",
+                    "email": "msaraujo@php.net"
+                },
+                {
+                    "name": "Michael Klishin",
+                    "email": "michaelklishin@me.com"
+                },
+                {
+                    "name": "Morf",
+                    "email": "i@morfi.ru"
+                },
+                {
+                    "name": "Rogerio Prado de Jesus",
+                    "email": "rogeriopradoj@gmail.com"
+                },
+                {
+                    "name": "Torben Brodt",
+                    "email": "t.brodt@gmail.com"
+                },
+                {
+                    "name": "unknown",
+                    "email": "kolyshkin@.sqlmaze.local"
+                }
+            ],
+            "description": "The most awesome validation engine ever created for PHP"
+        },
+        {
+            "name": "twig/twig",
+            "version": "v1.11.1",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/fabpot/Twig.git",
+                "reference": "v1.11.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://github.com/fabpot/Twig/archive/v1.11.1.zip",
+                "reference": "v1.11.1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.4"
+            },
+            "time": "2012-11-11 17:17:59",
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.11-dev"
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "Twig_": "lib/"
+                }
+            },
+            "license": [
+                "BSD-3"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Armin Ronacher",
+                    "email": "armin.ronacher@active-4.com"
+                }
+            ],
+            "description": "Twig, the flexible, fast, and secure template language for PHP",
+            "homepage": "http://twig.sensiolabs.org",
+            "keywords": [
+                "templating"
+            ]
+        }
+    ],
+    "packages-dev": null,
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "respect/rest": 20,
+        "respect/relational": 20,
+        "respect/data": 20
+    }
+}
