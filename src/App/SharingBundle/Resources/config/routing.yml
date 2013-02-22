@@ -1,0 +1,3 @@
+app_sharing_homepage:
+    pattern:  /
+    defaults: { _controller: AppSharingBundle:Default:index }

@@ -1,0 +1,7 @@
+parameters:
+#    app_sharing.example.class: App\SharingBundle\Example
+
+services:
+#    app_sharing.example:
+#        class: %app_sharing.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
