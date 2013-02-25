@@ -1,3 +1,13 @@
 app_sharing_homepage:
     pattern:  /
     defaults: { _controller: AppSharingBundle:Default:index }
+
+app_sharing_login:
+    pattern:  /login
+    defaults: { _controller: AppSharingBundle:Login:index }
+
+app_sharing_login_check:
+    pattern:  /login_check
+
+app_sharing_logout:
+    pattern:  /logout

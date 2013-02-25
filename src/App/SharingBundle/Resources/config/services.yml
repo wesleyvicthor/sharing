@@ -1,7 +1,12 @@
 parameters:
-#    app_sharing.example.class: App\SharingBundle\Example
+   user.provider.class: App\SharingBundle\User\Provider
+   authentication.handler.class: App\SharingBundle\User\Handler
 
 services:
-#    app_sharing.example:
-#        class: %app_sharing.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+    user.provider:
+       class: %user.provider.class%
+
+    authentication.handler:
+        class: %authentication.handler.class%
+        tags:
+            - { name: 'monolog.logger', channel: 'security' }
