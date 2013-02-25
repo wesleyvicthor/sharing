@@ -1,0 +1,70 @@
+body {
+    font-family: Ubuntu;
+}
+
+h1.app-logo {
+    font-size: 7.5em;
+    margin: 0px auto;
+    width: 3.7em;
+}
+
+.login-container {
+    width: 30%;
+    margin: 0px auto;
+}
+
+.login-container fieldset {
+    margin: 0px;
+    padding: 0px;
+    border: none;
+}
+
+.login-container input[type=text],
+.login-container input[type=password] {
+    width: 100%;
+    border: none;
+    margin: 0.4em 0em 0.4em 0em;
+    padding: 0.4em;
+    font-size: 2em;
+    background: #ccc;
+}
+
+.login-container input[type=submit] {
+    width: 100%;
+    font-size: 2em;
+    border: none;
+    background: #333;
+    color: #f7f7f7;
+    padding: 0.2em;
+}
+
+.hidden {
+    display: none;
+}
+
+.alert {
+    float: right;
+    margin: 1em;
+    font-weight: lighter;
+    padding: 1.5em;
+    position: relative;
+    background: #24a8e0;
+    color: #fff;
+}
+
+.alert button {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-weight: bold;
+    border: none;
+    font-size: 1em;
+    background: transparent;
+    margin: 3px;
+    color: #fff;
+}
+
+.alert button:hover {
+    background: #4fcde0;
+    color: #fff;
+}

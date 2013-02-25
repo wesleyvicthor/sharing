@@ -1,9 +1,25 @@
-define(['backbone'], function (Backbone) {
-	return Backbone.View.extend({
-		el: '.login-container',
-		render: function () {
-			this.$el.html('<input type="text" placeholder="Email" name="email" /><input type="password" placeholder="Senha" name="passw" />');
-			return this;
-		}
-	});
+define(['backbone', 'views/Alert'], function (Backbone, Alert) {
+    return Backbone.View.extend({
+        el: '.login-container',
+        events: {
+            'click input[type=submit]': 'onSubmit'
+        },
+
+        render: function () {
+            return this;
+        },
+
+        onSubmit: function (event) {
+            event.preventDefault();
+            var params = $('form', this.el).serialize();
+            $.post(APP_PATH + 'login_check', params, this.handleAuth);
+        },
+
+        handleAuth: function (response) {
+            if (response.fail) {
+                return (new Alert({ level: 'Atenção', message: 'Login ou Senha inválida!' })).render();
+            }
+            (new Alert({ level: 'Sucesso', message: 'Bem Vindo ' + response.usermail })).render()
+        }
+    });
 });

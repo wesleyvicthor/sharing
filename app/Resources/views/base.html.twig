@@ -11,24 +11,32 @@
         <meta name="description" content="sharing">
         <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="css/normalize.min.css">
-        <link rel="stylesheet" href="css/main.css">
+        <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Ubuntu:300,400'>
+        <link rel="stylesheet" href="{{ asset('css/normalize.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
         {% block stylesheets %}{% endblock %}
-        <script src="js/libs/modernizr.min.js"></script>
-        <script data-main="js/app.js" src="js/libs/require-jquery.js"></script>
+        <script src="{{ asset('js/libs/modernizr.min.js') }}"></script>
+        <script data-main="{{ asset('js/app.js') }}" src="{{ asset('js/libs/require-jquery.js') }}"></script>
+        <script type="text/javascript">
+            var APP_PATH = "{{ path('app_sharing_homepage') }}";
+        </script>
     </head>
     <body>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
-
         <div class="main-container">
+            <div class="alert-wrapper"></div>
             {% block main %}{% endblock %}
         </div>
 
         <footer class="wrapper">
             
         </footer>
+        <script type="text/template" id="alert-template">
+            <button class="alert-close">&times;</button>
+            <strong><%=level%>:</strong> <%=message%>
+        </script>
     </body>
 </html>
