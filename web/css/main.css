@@ -2,6 +2,10 @@ body {
     font-family: Ubuntu;
 }
 
+.main-container {
+    position: relative;
+}
+
 h1.app-logo {
     font-size: 7.5em;
     margin: 0px auto;
@@ -40,6 +44,12 @@ h1.app-logo {
 
 .hidden {
     display: none;
+}
+
+.alert-wrapper {
+    position: absolute;
+    top: 0px;
+    right: 0px;
 }
 
 .alert {
