@@ -1,4 +1,4 @@
-define(['backbone', 'views/Alert'], function (Backbone, Alert) {
+define(['backbone', 'views/Alert', 'routes/Home'], function (Backbone, Alert, HomeRouter) {
     return Backbone.View.extend({
         el: '.login-container',
         events: {
@@ -19,6 +19,9 @@ define(['backbone', 'views/Alert'], function (Backbone, Alert) {
             if (response.fail) {
                 return (new Alert({ level: 'Atenção', message: 'Login ou Senha inválida!' })).render();
             }
+
+            var homeRouter = new HomeRouter();
+            homeRouter.navigate('', { trigger: true });
             (new Alert({ level: 'Sucesso', message: 'Bem Vindo ' + response.usermail })).render()
         }
     });

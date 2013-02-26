@@ -18,6 +18,7 @@ requirejs.config({
 
 });
 
-requirejs(['jquery', 'backbone', 'views/Login'], function ($, Backbone, LoginView) {
+requirejs(['views/Login'], function (LoginView) {
     (new LoginView()).render();
+    Backbone.history.start({pushState: true});
 });
