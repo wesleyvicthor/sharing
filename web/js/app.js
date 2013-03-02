@@ -20,5 +20,5 @@ requirejs.config({
 
 requirejs(['views/Login'], function (LoginView) {
     (new LoginView()).render();
-    Backbone.history.start({pushState: true});
+    Backbone.history.start({pushState: true, root:'/app_dev.php/'});
 });

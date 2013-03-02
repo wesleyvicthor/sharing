@@ -5,7 +5,6 @@ define(['backbone', 'jquery'], function (Backbone, $) {
         },
 
         initialize: function (options) {
-            console.log(options);
             this.loginview = options.loginview;
         },
 
