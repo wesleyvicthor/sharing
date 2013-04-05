@@ -1,10 +1,44 @@
-body {
+html, body {
     font-family: Ubuntu;
     height: 100%;
 }
 
+input {
+    width: 100%;
+    border: none;
+    margin: 0.4em 0em 0.4em 0em;
+    font-size: 2em;
+    background: #fff;
+    font-family: Ubuntu Mono;
+}
+
+fieldset {
+    margin: 0px;
+    padding: 0px;
+    border: none;
+}
+
+h3 {
+    font-size: 4em;
+    font-weight: lighter;
+    color: #666;
+    margin: 0 0 0.2em;
+}
+
+form {
+    padding: 0 3em;
+}
+
 .main-container {
     position: relative;
+    background: #ccc;
+    height: 100%;
+}
+
+.input-wrapper {
+    background: #fff;
+    margin-bottom: 1em;
+    padding: 0 0.7em;
 }
 
 h1.app-logo {
@@ -13,28 +47,23 @@ h1.app-logo {
     width: 3.7em;
 }
 
-.login-container {
-    width: 30%;
+.login-container,
+.register-group-container {
+    width: 40%;
     margin: 0px auto;
+    margin-top: 2em;
 }
 
-.login-container fieldset {
-    margin: 0px;
-    padding: 0px;
-    border: none;
+.login-container .input-wrapper {
+    background: #ccc;
 }
-
 .login-container input[type=text],
 .login-container input[type=password] {
-    width: 100%;
-    border: none;
-    margin: 0.4em 0em 0.4em 0em;
-    padding: 0.4em;
-    font-size: 2em;
     background: #ccc;
 }
 
-.login-container input[type=submit] {
+.login-container input[type=submit],
+.register-group-container input[type=submit] {
     width: 100%;
     font-size: 2em;
     border: none;
@@ -80,6 +109,8 @@ h1.app-logo {
     color: #fff;
 }
 
+/*homepage*/
+
 .app-logo-wrapper .app-logo {
     margin: 0px 0px 0px 0px;
     border: solid 1px;
@@ -89,13 +120,13 @@ h1.app-logo {
 .user-info {
     border: solid 1px;
     overflow: hidden;
-    padding-left: 2.3em;
+    padding-left: 2.6em;
 }
 
 .user-info div.user-photo {
     border: solid 1px;
-    width: 80px;
-    height: 80px;
+    width: 63px;
+    height: 63px;
     float: left;
     margin-right: 0.5em;
 }
@@ -121,6 +152,8 @@ nav.menu-bar ul li{
     display: inline-block;
     margin-right: 1em;
     border: solid 1px;
+    width: 69px;
+    height: 69px;
 }
 
 .sharing-stage {
@@ -135,6 +168,8 @@ nav.menu-bar ul li{
     float: left;
     padding: 1em;
     margin: 0.5em;
+    width: 16em;
+    height: 16em;
 }
 .group-box ul {
     margin: 0;
@@ -143,8 +178,31 @@ nav.menu-bar ul li{
 .group-box ul li {
     list-style: none;
     padding: 0.4em;
+    overflow: hidden;
+    color: #fff;
 }
 
 .group-box ul li:hover {
     background: #ccc;
+}
+
+.group-box .user-photo,
+.group-box .user-name {
+    float: left;
+}
+
+.group-box .user-photo {
+    width: 25px;
+    height: 25px;
+    border: solid 1px;
+}
+
+.group-box .user-name {
+    margin: 6px 0 0 8px;
+}
+
+.group-box h2.group-name {
+    font-weight: lighter;
+    font-size: 2.3em;
+    color: #333;
 }
