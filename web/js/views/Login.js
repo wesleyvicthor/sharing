@@ -20,8 +20,9 @@ define(['backbone', 'views/Alert', 'routes/Home'], function (Backbone, Alert, Ho
                 return (new Alert({ level: 'Atenção', message: 'Login ou Senha inválida!' })).render();
             }
 
-            var homeRouter = new HomeRouter({loginview: this});
-            homeRouter.navigate('', { trigger: true });
+            var homeRouter = new HomeRouter();
+            homeRouter.navigate('homepage', { trigger: true });
+            
             (new Alert({ level: 'Sucesso', message: 'Bem Vindo ' + response.usermail })).render()
         }
     });

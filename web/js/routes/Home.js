@@ -1,16 +1,12 @@
-define(['backbone', 'jquery'], function (Backbone, $) {
+define(['backbone', 'jquery', 'underscore', 'views/Home'], function (Backbone, $, _, Home) {
     return Backbone.Router.extend({
+        template: $('script#homepage').html(),
         routes: {
-            '': 'homePage'
-        },
-
-        initialize: function (options) {
-            this.loginview = options.loginview;
+            'homepage': 'homePage'
         },
 
         homePage: function () {
-            console.log(this.loginview);
-            $(this.loginview.el).fadeOut('slow');
+            new Home();
         }
     });
 });
