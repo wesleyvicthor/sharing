@@ -38,6 +38,22 @@
             <button class="alert-close">&times;</button>
             <strong><%=level%>:</strong> <%=message%>
         </script>
+        <script type="text/template" id="register-teacher">
+            <form method="post" name="register-teacher">
+                <fieldset>
+                    <div class="input-wrapper">
+                        <input type="text" name="email" placeholder="Email"/>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="password" name="passw" placeholder="Senha" />
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="password" name="passw-check" placeholder="Confirme a senha" />
+                    </div>
+                    <input type="submit" value="Cadastrar" />
+                </fieldset>
+            </form>
+        </script>
         <script type="text/template" id="homepage">
             <div class="app-logo-wrapper">
                 <h1 class="app-logo">Sharing</h1>

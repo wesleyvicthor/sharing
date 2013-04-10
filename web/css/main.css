@@ -70,6 +70,17 @@ h1.app-logo {
     margin-top: 2em;
 }
 
+div.register-teacher {
+    padding: 0 3em;
+    text-align: right;
+}
+.register-teacher small {
+    color: blue;
+    font-family: Ubuntu;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
 .hidden {
     display: none;
 }
