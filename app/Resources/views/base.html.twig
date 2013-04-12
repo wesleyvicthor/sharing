@@ -38,6 +38,20 @@
             <button class="alert-close">&times;</button>
             <strong><%=level%>:</strong> <%=message%>
         </script>
+        <script type="text/template" id="login">
+            <form method="post" name="login">
+                <fieldset>
+                    <div class="input-wrapper">
+                        <input type="text" name="email" placeholder="Email"/>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="password" name="passw" placeholder="Senha" />
+                    </div>
+                    <input type="submit" value="Entrar" />
+                </fieldset>
+            </form>
+            <div class="register-teacher"><a data-uri="register-teacher" href="register-teacher">Sou Professor</a></div>
+        </script>
         <script type="text/template" id="register-teacher">
             <form method="post" name="register-teacher">
                 <fieldset>

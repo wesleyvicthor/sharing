@@ -49,6 +49,7 @@ form {
     background: #fff;
     margin-bottom: 1em;
     padding: 0 0.7em;
+    border: solid 1px #fff;
 }
 
 h1.app-logo {

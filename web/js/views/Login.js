@@ -1,18 +1,19 @@
-define(['backbone', 'views/Alert', 'routes/Home', 'routes/Login'], function (Backbone, Alert, HomeRouter, LoginRoute) {
+define(['backbone', 'underscore', 'views/Alert', 'routes/Home', 'routes/Login'], function (Backbone, _, Alert, HomeRouter, LoginRoute) {
     return Backbone.View.extend({
-        el: '.login-container',
+        template: $('script#login').html(),
         events: {
-            'click input[type=submit]': 'onSubmit',
-            'click .register-teacher small': 'displayRegisterTeacherView'
+            'click input[type=submit]': 'onSubmit'
+        },
+
+        initialize: function () {
+            this.render();
         },
 
         render: function () {
-            return this;
-        },
-
-        displayRegisterTeacherView: function () {
-            var loginRoute = new LoginRoute();
-            loginRoute.navigate('register-teacher', { trigger: true });
+            var login = this.$el.html(
+                _.template(this.template)
+            );
+            $('.login-container').html(login.fadeIn('slow'));
         },
 
         onSubmit: function (event) {
