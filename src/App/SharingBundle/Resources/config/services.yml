@@ -19,7 +19,9 @@ services:
         arguments: [@pdo]
 
     user.provider:
-       class: %user.provider.class%
+        class: %user.provider.class%
+        calls:
+            - [setMapper, [@mapper]]
 
     authentication.handler:
         class: %authentication.handler.class%

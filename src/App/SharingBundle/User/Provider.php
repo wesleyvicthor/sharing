@@ -6,18 +6,30 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
+use Respect\Relational\Mapper;
 
 class Provider implements UserProviderInterface
 {
+    protected $mapper;
+
+    public function setMapper(Mapper $mapper) {
+        $this->mapper = $mapper;
+    }
+
     public function loadUserByUsername($userEmail)
     {
-        if ($userEmail != 'wesley') {
-             throw new UsernameNotFoundException(sprintf('Unable to find an active identified by "%s".', $userEmail));
+        if (!filter_var($userEmail, FILTER_VALIDATE_EMAIL)) {
+            throw new \Exception('E-mail inválido!');
         }
-        $password = 123;
-        $salt = null;
-        $roles = array('ROLE_USER');
-        return new Webservice($userEmail, md5($password), $salt, $roles);
+
+        $user = $this->mapper->user(array('email' => $userEmail))
+            ->fetch('\App\SharingBundle\Entities\User');
+
+        if (!$user) {
+            throw new UsernameNotFoundException(sprintf('Unable to find an active identified by "%s".', $userEmail));
+        }
+        
+        return new Webservice($user->email, md5($user->passw), null, array('ROLE_'.$user->type));
     }
 
     public function refreshUser(UserInterface $user)
