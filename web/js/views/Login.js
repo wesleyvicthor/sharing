@@ -2,18 +2,20 @@ define(['backbone', 'underscore', 'views/Alert', 'routes/Home', 'routes/Login'],
     return Backbone.View.extend({
         template: $('script#login').html(),
         events: {
-            'click input[type=submit]': 'onSubmit'
-        },
-
-        initialize: function () {
-            this.render();
+            'click input[type=submit]': 'onSubmit',
+            'click a': 'handleLink'
         },
 
         render: function () {
-            var login = this.$el.html(
+            this.$el.html(
                 _.template(this.template)
             );
-            $('.login-container').html(login.fadeIn('slow'));
+            return this;
+        },
+
+        handleLink: function (event) {
+            event.preventDefault();
+            Sharing.Router.Login.navigate('register-teacher', true);
         },
 
         onSubmit: function (event) {

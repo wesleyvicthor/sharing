@@ -82,6 +82,23 @@ div.register-teacher {
     cursor: pointer;
 }
 
+.autocomplete-suggestions { 
+    border-top: 1px solid rgb(209, 229, 238);
+    background: #FFF;
+    font-size: 2em;
+    width: none;
+    top: 240px !important;
+    position: none;
+}
+.autocomplete-suggestion { padding: 5px 10px; white-space: nowrap; color: #999; }
+.autocomplete-selected { background: #F0F0F0; }
+.autocomplete-suggestions strong { font-weight: normal; color: #3399FF; }
+
+#autocomplete-university,
+#autocomplete-course {
+    /*position: relative;*/
+}
+
 .hidden {
     display: none;
 }

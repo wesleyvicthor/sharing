@@ -5,8 +5,14 @@ define(['backbone', 'underscore', 'jquery'], function (Backbone, _, $) {
             'click button': 'closeAlert'
         },
 
+        initialize: function (alert) {
+            this.model = _.extend({
+                context: 'Info'
+            }, alert);
+        },
+
         render: function () {
-            this.$el.html(_.template($('script#alert-template').html())(this.options));
+            this.$el.html(_.template($('script#alert-template').html())(this.model));
             $('.alert-wrapper').html(this.$el.fadeIn('fast'));
             this.delegateEvents();
             return this;

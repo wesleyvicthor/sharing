@@ -3,6 +3,21 @@ parameters:
    authentication.handler.class: App\SharingBundle\User\Handler
 
 services:
+    sql:
+        class: Respect\Relational\Sql
+    db:
+        class: Respect\Relational\Db
+        arguments: [@pdo]
+    pdo:
+        class: PDO
+        arguments:
+            - 'mysql:host=%database_host%;port=3306;dbname=%database_name%'
+            - %database_user%
+            - %database_password%
+    mapper:
+        class: Respect\Relational\Mapper
+        arguments: [@pdo]
+
     user.provider:
        class: %user.provider.class%
 

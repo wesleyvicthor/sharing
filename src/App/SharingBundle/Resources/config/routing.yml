@@ -2,6 +2,37 @@ app_sharing_homepage:
     pattern:  /
     defaults: { _controller: AppSharingBundle:Default:index }
 
+app_sharing_register_teacher_view:
+    pattern:  /register-teacher
+    defaults: { _controller: AppSharingBundle:Login:index }
+    requirements:
+        _method: GET
+
+app_sharing_register_teacher:
+    pattern:  /register-teacher
+    defaults: { _controller: AppSharingBundle:Login:registerTeacher }
+    requirements:
+        _method: POST
+
+app_sharing_search_university:
+    pattern:  /search-university
+    defaults: { _controller: AppSharingBundle:Default:searchUniversity }
+
+app_sharing_activate_send:
+    pattern:  /activate/{token}
+    defaults: { _controller: AppSharingBundle:Login:activate }
+    requirements:
+        _method: POST
+
+app_sharing_activate:
+    pattern:  /activate/{token}
+    defaults: { _controller: AppSharingBundle:Login:index }
+
+
+app_sharing_search_course_by_university_id:
+    pattern:  /search-course/{universityId}
+    defaults: { _controller: AppSharingBundle:Default:searchCourseByUniversityId }
+
 app_sharing_login:
     pattern:  /login
     defaults: { _controller: AppSharingBundle:Login:index }

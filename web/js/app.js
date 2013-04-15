@@ -13,19 +13,20 @@ requirejs.config({
     paths: {
         'backbone': 'libs/backbone',
         'underscore': 'libs/underscore',
-        'jquery': 'libs/jquery'
+        'jquery': 'libs/jquery',
+        'autocomplete': 'libs/autocomplete',
+        'queryparams': 'libs/backbone.queryparams'
     }
 
 });
 
-requirejs(['routes/Login'], function (LoginRoute) {
-    var loginRoute = new LoginRoute();
-    Backbone.history.start({pushState: true, root:'/app_dev.php/'});
+window.Sharing = {};
+Sharing.Router = {};
 
-    $('[data-uri]').on('click', function (event) {
-        event.preventDefault();
-        loginRoute.navigate($(this).data('uri'), { trigger: true });
-    });
+requirejs(['routes/Login'], function (LoginRoute) {
+    Sharing.Router.Login = new LoginRoute();
+
+    Backbone.history.start({pushState: true, root:'/app_dev.php/'});
 
     $('input').on('focusout', function () {
         $('.input-wrapper').css('border-color', '#fff');
