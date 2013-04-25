@@ -14,6 +14,7 @@ define(['backbone', 'underscore', 'autocomplete', 'views/Alert'], function (Back
                 paramName: 'q',
                 minChars: 2,
                 width: 'none',
+                noCache: true,
                 onSelect: function (response) {
                     $(this).data('id', response.data);
                 }
@@ -39,6 +40,7 @@ define(['backbone', 'underscore', 'autocomplete', 'views/Alert'], function (Back
         },
 
         bindAutocompleteCourse: function (event) {
+            $('#autocomplete-course').empty();
             this.$('input[name=course]').autocomplete(
                 _.extend({
                     serviceUrl: APP_PATH + 'search-course/' + $('input[name=university]').data('id'),
@@ -48,6 +50,7 @@ define(['backbone', 'underscore', 'autocomplete', 'views/Alert'], function (Back
         },
 
         bindAutocompleteUniversity: function (event) {
+            $('#autocomplete-university').empty();
             this.$('input[name=university]').autocomplete(
                 _.extend({
                     serviceUrl: APP_PATH + 'search-university',

@@ -1,4 +1,4 @@
-define(['backbone', 'underscore', 'views/Alert', 'routes/Home', 'routes/Login'], function (Backbone, _, Alert, HomeRouter, LoginRoute) {
+define(['backbone', 'underscore', 'views/Alert', 'routes/Login'], function (Backbone, _, Alert, LoginRoute) {
     return Backbone.View.extend({
         template: $('script#login').html(),
         events: {
@@ -29,9 +29,7 @@ define(['backbone', 'underscore', 'views/Alert', 'routes/Home', 'routes/Login'],
                 return (new Alert({ level: 'Atenção', message: 'Login ou Senha inválida!' })).render();
             }
 
-            var homeRouter = new HomeRouter();
-            homeRouter.navigate('homepage', { trigger: true });
-            
+            Sharing.Router.Home.navigate('homepage', { trigger: true });
             (new Alert({ level: 'Sucesso', message: 'Bem Vindo ' + response.usermail })).render()
         }
     });

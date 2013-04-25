@@ -4,12 +4,24 @@ namespace App\SharingBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use App\SharingBundle\Entities\User;
+use App\SharingBundle\Entities\Group;
+use App\SharingBundle\Entities\Course;
+use App\SharingBundle\Entities\Teacher;
+use App\SharingBundle\Entities\UserGroup;
+use App\SharingBundle\Entities\University;
 
 class DefaultController extends Controller
 {
     public function indexAction()
     {
         return $this->render('AppSharingBundle:Default:homepage.html.twig');
+    }
+
+    public function redirectAction()
+    {
+        return $this->redirect($this->generateUrl('app_sharing_homepage'));
     }
 
     public function searchUniversityAction()
@@ -35,6 +47,137 @@ class DefaultController extends Controller
         return $this->autocompleteResponse($name, $searchResult);
     }
 
+    public function registerGroupAction(Request $request)
+    {
+        $courseId = $request->request->get('course_id');
+        $universityId = $request->request->get('university_id');
+        $groupName = trim($request->request->get('group'));
+        $emails = trim($request->request->get('emails'));
+
+        $universityName = trim($request->request->get('university'));
+        $courseName = trim($request->request->get('course'));
+
+        if (empty($universityName)) {
+            return new JsonResponse(array('fail' => 'Você deve especificar uma universidade.'));
+        }
+
+        if (empty($courseName)) {
+            return new JsonResponse(array('fail' => 'Você deve especificar um curso.'));
+        }
+
+        if (empty($emails)) {
+            return new JsonResponse(array('fail' => 'Lista de emails não pode ser vazia.'));
+        }
+
+        if (empty($groupName)) {
+            return new JsonResponse(array('fail' => 'Você deve especificar o nome da turma.'));
+        }
+
+        if (empty($universityId)) {
+            $universityId = $this->createUniversity($universityName);
+        }
+
+        if (empty($courseId)) {
+            $courseId = $this->createCourse($universityId, $courseName);
+        }
+        $emails = explode(';', $emails);
+        $filteredEmails = $this->handleEmailList($emails);
+
+        $mapper = $this->get('mapper');
+
+        $group = new Group();
+        $group->name = $groupName;
+        $group->owner_id = $this->getUser()->getId();
+        $mapper->group->persist($group);
+        $mapper->flush();
+
+        if (!$group->id) {
+            return false;
+        }
+
+        $failToCreate = array();
+        $success = array();
+        $toCreate = array_merge($filteredEmails['registeredUsers'], $filteredEmails['newUsers']);
+        foreach ($toCreate as $user) {
+            $created = $this->createUserGroup($user, $group->id, $universityId, $courseId);
+            $email = isset($user->email) ? $user->email : $user;
+            if (!$created) {
+                $failToCreate[] = $email;
+            }
+            $success[] = $email;
+        }
+
+        return new JsonResponse(array('success' => implode(', ', $success) . ' cadastrado(s) com sucesso.'));
+    }
+
+    protected function createUserGroup($email, $groupId, $universityId, $courseId)
+    {
+        $mapper = $this->get('mapper');
+
+        $user = $email;
+        if (!$user instanceof \App\Sharing\Entities\User) {
+            $user = new User();
+            $user->name = $user->email = $email;
+            $user->university_id = $universityId;
+            $user->course_id = $courseId;
+            $user->type = 'STUDENT';
+
+            $mapper->user->persist($user);
+            $mapper->flush();
+
+            if (!$user->id) {
+                return false;
+            }
+            $this->sendUserEmailConfirm($user->email);
+        }
+
+        $userGroup = new UserGroup();
+        $userGroup->group_id = $groupId;
+        $userGroup->user_id = $user->id;
+        $userGroup->university_id = $universityId;
+        $userGroup->course_id = $courseId;
+
+        $mapper->userGroup->persist($userGroup);
+        $mapper->flush();
+
+        if (!$userGroup->id) {
+            return false;
+        }
+
+        return true;
+    }
+
+    protected function handleEmailList(array $emails)
+    {
+        $invalidEmails = array();
+        $asTeacher = array();
+        $registeredUsers = array();
+        $newUsers = array();
+
+        $mapper = $this->get('mapper');
+
+        foreach ($emails as $email) {
+            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $invalidEmails[] = $email;
+            }
+
+            if ($user = $this->userExists($email)) {
+                if ($user->type == 'TEACHER') {
+                    $asTeacher[] = $user;
+                }
+                $registeredUsers[] = $user;
+            }
+            $newUsers[] = $email;
+        }
+
+        return array(
+            'invalidEmails' => $invalidEmails,
+            'registeredAsTeacher' => $asTeacher,
+            'registeredUsers' => $registeredUsers,
+            'newUsers' => $newUsers
+        );
+    }
+
     protected function autocompleteResponse($query, array $suggestions)
     {
         $suggestions = array_map(function ($sugg) {
@@ -47,5 +190,53 @@ class DefaultController extends Controller
         );
 
         return new JsonResponse($response);
+    }
+
+    protected function createCourse($universityId, $courseName)
+    {
+        $course = new Course();
+        $course->name = $courseName;
+        $course->university_id = $universityId;
+
+        $mapper = $this->get('mapper');
+        $mapper->course->persist($course);
+        $mapper->flush();
+
+        return $course->id;
+    }
+
+    protected function createUniversity($universityName)
+    {
+        $university = new University();
+        $university->name = $universityName;
+
+        $mapper = $this->get('mapper');
+        $mapper->university->persist($university);
+        $mapper->flush();
+
+        return $university->id;
+    }
+
+    protected function userExists($email)
+    {
+        $mapper = $this->get('mapper');
+        return $mapper->user(array('email' => $email))
+            ->fetch('\App\SharingBundle\Entities\User');
+    }
+
+    protected function sendUserEmailConfirm(User $user)
+    {
+        $message = \Swift_Message::newInstance();
+        $message->setSubject('Sharing no reply')
+            ->setFrom('noreplay@sharing.com')
+            ->setTo($user->email)
+            ->setBody(
+                sprintf(
+                    "Click no link para ativar o cadastro %s",
+                    'http://sharing.com/activate?token=' . base64_encode($user->email)
+                )
+            );
+
+        $this->get('mailer')->send($message);
     }
 }

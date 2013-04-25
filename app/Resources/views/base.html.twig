@@ -13,13 +13,14 @@
 
         <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Ubuntu:300,400'>
         <link rel="stylesheet" href="{{ asset('css/normalize.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/sprite.css') }}">
         <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
         {% block stylesheets %}{% endblock %}
         <script src="{{ asset('js/libs/modernizr.min.js') }}"></script>
         <script data-main="{{ asset('js/app.js') }}" src="{{ asset('js/libs/require-jquery.js') }}"></script>
         <script type="text/javascript">
-            var APP_PATH = "{{ path('app_sharing_homepage') }}";
+            var APP_PATH = "{{ path('app_sharing_homepage_') }}";
         </script>
     </head>
     <body>
@@ -76,67 +77,100 @@
                 </fieldset>
             </form>
         </script>
+        <script type="text/template" id="register-group">
+            <form method="post" name="register-group">
+                <fieldset>
+                    <div class="input-wrapper">
+                        <input autocomplete="off" type="text" name="university" placeholder="Universidade"/>
+                        <div id="autocomplete-university"></div>
+                    </div>
+                    <div class="input-wrapper">
+                        <input autocomplete="off" type="text" name="course" placeholder="Curso"/>
+                        <div id="autocomplete-course"></div>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="text" name="group" placeholder="Nome da turma"/>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="text" name="emails" placeholder="Emails" />
+                    </div>
+                    <input type="submit" value="Cadastrar" />
+                </fieldset>
+            </form>
+        </script>
         <script type="text/template" id="homepage">
             <div class="app-logo-wrapper">
+                <div class="assets-services">
+                    <nav class="services">
+                        <ul>
+                            <li class="icon-dropbox"></li>
+                            <li class="icon-google-drive"></li>
+                            <li class="icon-sync"></li>
+                        </ul>
+                    </nav>
+                </div>
                 <h1 class="app-logo">Sharing</h1>
             </div>
             <div class="user-info">
-                <div class="user-photo"></div>
-                <span class="user-name">Wesley Victhor Mendes</span>
-                <div class="user-settings"></div>
+                <div class="user-photo icon-user"></div>
+                <span class="user-name">{{ app.user.username }}</span>
+                <!--<div class="user-settings icon-user-config"></div>-->
             </div>
-            <div class="stage-container">
+            <div id="stage-container">
                 <nav class="menu-bar">
-                    <ul class="menu-bar">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
                     <div class="section-name">Turmas</div>
+                    <ul class="menu-bar">
+                        <li class="icon-groups active"><a href="#groups"></a></li>
+                        <li class="icon-files"><a href="#files"></a></li>
+                        <li class="icon-register"><a href="#register-group"></a></li>
+                    </ul>
                 </nav>
                 <div class="sharing-stage">
-                    <div class="group-box">
-                        <ul>
-                            <li>
-                                <div class="user-photo"></div>
-                                <div class="user-name">Wesley Victhor Mendes</div>
-                            </li>
-                            <li>
-                                <div class="user-photo"></div>
-                                <div class="user-name">Bruno Bertela</div>
-                            </li>
-                            <li>
-                                <div class="user-photo"></div>
-                                <div class="user-name">Gustavo Groner</div>
-                            </li>
-                            <li>
-                                <div class="user-photo"></div>
-                                <div class="user-name">Helder Lozzardo</div>
-                            </li>
-                        </ul>
-                        <h2 class="group-name">FIEO - SI/NA1</h2>
+                    <div id="groups">
+                        <div class="group-box">
+                            <ul>
+                                <li>
+                                    <div class="user-photo"></div>
+                                    <div class="user-name">Wesley Victhor Mendes</div>
+                                </li>
+                                <li>
+                                    <div class="user-photo"></div>
+                                    <div class="user-name">Bruno Bertela</div>
+                                </li>
+                                <li>
+                                    <div class="user-photo"></div>
+                                    <div class="user-name">Gustavo Groner</div>
+                                </li>
+                                <li>
+                                    <div class="user-photo"></div>
+                                    <div class="user-name">Helder Lozzardo</div>
+                                </li>
+                            </ul>
+                            <h2 class="group-name">FIEO - SI/NA1</h2>
+                        </div>
+                        <div class="group-box">
+                            <ul>
+                                <li>
+                                    <div class="user-photo"></div>
+                                    <div class="user-name">Wesley Victhor Mendes</div>
+                                </li>
+                                <li>
+                                    <div class="user-photo"></div>
+                                    <div class="user-name">Bruno Bertela</div>
+                                </li>
+                                <li>
+                                    <div class="user-photo"></div>
+                                    <div class="user-name">Gustavo Groner</div>
+                                </li>
+                                <li>
+                                    <div class="user-photo"></div>
+                                    <div class="user-name">Helder Lozzardo</div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="group-box">
-                        <ul>
-                            <li>
-                                <div class="user-photo"></div>
-                                <div class="user-name">Wesley Victhor Mendes</div>
-                            </li>
-                            <li>
-                                <div class="user-photo"></div>
-                                <div class="user-name">Bruno Bertela</div>
-                            </li>
-                            <li>
-                                <div class="user-photo"></div>
-                                <div class="user-name">Gustavo Groner</div>
-                            </li>
-                            <li>
-                                <div class="user-photo"></div>
-                                <div class="user-name">Helder Lozzardo</div>
-                            </li>
-                        </ul>
-                    </div>
+                    <div id="files">FILES</div>
+                    <div id="register-group"></div>
                 </div>
             </div>
         </script>

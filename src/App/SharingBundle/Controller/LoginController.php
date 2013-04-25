@@ -10,7 +10,7 @@ use App\SharingBundle\Entities\Teacher;
 use App\SharingBundle\Entities\University;
 use App\SharingBundle\Entities\Course;
 
-class LoginController extends Controller
+class LoginController extends DefaultController
 {
     public function indexAction()
     {
@@ -39,22 +39,6 @@ class LoginController extends Controller
         $mapper->flush();
 
         return new JsonResponse(array('success' => "{$email} Ativado com sucesso!"));
-    }
-
-    public function sendUserEmailConfirm(User $user)
-    {
-        $message = \Swift_Message::newInstance();
-        $message->setSubject('Sharing no reply')
-            ->setFrom('noreplay@sharing.com')
-            ->setTo($user->email)
-            ->setBody(
-                sprintf(
-                    "Click no link para ativar o cadastro %s",
-                    'http://sharing.com/activate?token=' . base64_encode($user->email)
-                )
-            );
-
-        $this->get('mailer')->send($message);
     }
 
     public function registerTeacherAction(Request $request)
@@ -114,37 +98,5 @@ class LoginController extends Controller
         return new JsonResponse(
             array('success' => "Verifique sua caixa de email para confirmar o cadastro.")
         );
-    }
-
-    protected function createCourse($universityId, $courseName)
-    {
-        $course = new Course();
-        $course->name = $courseName;
-        $course->university_id = $universityId;
-
-        $mapper = $this->get('mapper');
-        $mapper->course->persist($course);
-        $mapper->flush();
-
-        return $course->id;
-    }
-
-    protected function createUniversity($universityName)
-    {
-        $university = new University();
-        $university->name = $universityName;
-
-        $mapper = $this->get('mapper');
-        $mapper->university->persist($university);
-        $mapper->flush();
-
-        return $university->id;
-    }
-
-    protected function userExists($email)
-    {
-        $mapper = $this->get('mapper');
-        return $mapper->user(array('email' => $email))
-            ->fetch('\App\SharingBundle\Entities\User');
     }
 }

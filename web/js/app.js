@@ -15,7 +15,9 @@ requirejs.config({
         'underscore': 'libs/underscore',
         'jquery': 'libs/jquery',
         'autocomplete': 'libs/autocomplete',
-        'queryparams': 'libs/backbone.queryparams'
+        'queryparams': 'libs/backbone.queryparams',
+        'bootstrap': 'libs/bootstrap.min',
+        'jquery-ui': 'libs/jquery-ui'
     }
 
 });
@@ -23,8 +25,9 @@ requirejs.config({
 window.Sharing = {};
 Sharing.Router = {};
 
-requirejs(['routes/Login'], function (LoginRoute) {
-    Sharing.Router.Login = new LoginRoute();
+requirejs(['routes/Login', 'routes/Home'], function (LoginRouter, HomeRouter) {
+    Sharing.Router.Login = new LoginRouter();
+    Sharing.Router.Home = new HomeRouter();
 
     Backbone.history.start({pushState: true, root:'/app_dev.php/'});
 

@@ -1,5 +1,9 @@
-app_sharing_homepage:
+app_sharing_homepage_:
     pattern:  /
+    defaults: { _controller: AppSharingBundle:Default:redirect }
+
+app_sharing_homepage:
+    pattern:  /homepage
     defaults: { _controller: AppSharingBundle:Default:index }
 
 app_sharing_register_teacher_view:
@@ -11,6 +15,18 @@ app_sharing_register_teacher_view:
 app_sharing_register_teacher:
     pattern:  /register-teacher
     defaults: { _controller: AppSharingBundle:Login:registerTeacher }
+    requirements:
+        _method: POST
+
+app_sharing_register_group_view:
+    pattern:  /register-group
+    defaults: { _controller: AppSharingBundle:Default:index }
+    requirements:
+        _method: GET
+
+app_sharing_register_group:
+    pattern:  /register-group
+    defaults: { _controller: AppSharingBundle:Default:registerGroup }
     requirements:
         _method: POST
 

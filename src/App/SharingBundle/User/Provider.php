@@ -28,8 +28,9 @@ class Provider implements UserProviderInterface
         if (!$user) {
             throw new UsernameNotFoundException(sprintf('Unable to find an active identified by "%s".', $userEmail));
         }
-        
-        return new Webservice($user->email, md5($user->passw), null, array('ROLE_'.$user->type));
+        $userWebservice = new Webservice($user->email, md5($user->passw), null, array('ROLE_'.$user->type));
+        $userWebservice->setId($user->id);
+        return $userWebservice;
     }
 
     public function refreshUser(UserInterface $user)

@@ -10,6 +10,7 @@ class Webservice implements UserInterface
     private $password;
     private $salt = 123;
     private $roles = array();
+    private $id;
 
     public function __construct($userEmail, $password, $salt, array $roles)
     {
@@ -17,6 +18,16 @@ class Webservice implements UserInterface
         $this->password = $password;
         $this->salt = $salt;
         $this->roles = $roles;
+    }
+
+    public function getId() {
+        return $this->id;
+    }
+
+    public function setId($id) {
+        $this->id = $id;
+    
+        return $this;
     }
 
     public function getRoles()
