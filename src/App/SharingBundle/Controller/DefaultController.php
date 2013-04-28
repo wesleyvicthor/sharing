@@ -41,9 +41,9 @@ class DefaultController extends Controller
 
         $searchResult = $db->select('course.*')->from('course')
             ->join('university')
+            ->on('university.id = course.university_id')
             ->where(array('course.name LIKE' =>"%{$name}%", 'university.id' => $universityId))
             ->fetchAll();
-
         return $this->autocompleteResponse($name, $searchResult);
     }
 
@@ -88,7 +88,7 @@ class DefaultController extends Controller
         $group = new Group();
         $group->name = $groupName;
         $group->owner_id = $this->getUser()->getId();
-        $mapper->group->persist($group);
+        $mapper->{'`group`'}->persist($group);
         $mapper->flush();
 
         if (!$group->id) {
@@ -115,7 +115,7 @@ class DefaultController extends Controller
         $mapper = $this->get('mapper');
 
         $user = $email;
-        if (!$user instanceof \App\Sharing\Entities\User) {
+        if (!$user instanceof \App\SharingBundle\Entities\User) {
             $user = new User();
             $user->name = $user->email = $email;
             $user->university_id = $universityId;
@@ -221,19 +221,24 @@ class DefaultController extends Controller
     {
         $mapper = $this->get('mapper');
         return $mapper->user(array('email' => $email))
-            ->fetch('\App\SharingBundle\Entities\User');
+            ->fetch('\\App\\SharingBundle\\Entities\\User');
     }
 
-    protected function sendUserEmailConfirm(User $user)
+    protected function sendUserEmailConfirm($user)
     {
+        $email = $user;
+        if ($user instanceof \App\SharingBundle\Entities\User) {
+            $email = $user->email;
+        }
+
         $message = \Swift_Message::newInstance();
         $message->setSubject('Sharing no reply')
             ->setFrom('noreplay@sharing.com')
-            ->setTo($user->email)
+            ->setTo($email)
             ->setBody(
                 sprintf(
                     "Click no link para ativar o cadastro %s",
-                    'http://sharing.com/activate?token=' . base64_encode($user->email)
+                    'http://sharing.com/activate?token=' . base64_encode($email)
                 )
             );
 

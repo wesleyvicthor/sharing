@@ -46,6 +46,8 @@ CREATE  TABLE IF NOT EXISTS `sharing`.`user` (
   `course_id` INT NULL ,
   `type` ENUM('STUDENT', 'TEACHER') NULL ,
   `active` ENUM('0','1') NULL DEFAULT '0' ,
+  `passw` VARCHAR(255) NULL ,
+  `email` VARCHAR(255) NOT NULL ,
   PRIMARY KEY (`id`, `university_id`, `course_id`) ,
   INDEX `fk_university_idx` (`university_id` ASC) ,
   INDEX `fk_course_idx` (`course_id` ASC) ,
@@ -63,32 +65,6 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_general_ci;
 
-alter table `sharing`.`user` add `passw` VARCHAR(255) NOT NULL;
-alter table `sharing`.`user` add `email` VARCHAR(255) NOT NULL;
-
-
-
--- -----------------------------------------------------
--- Table `sharing`.`message`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `sharing`.`message` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `message` TEXT NULL ,
-  `datetime` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP COMMENT '	' ,
-  `from` INT NULL ,
-  `to` INT NULL ,
-  `group` INT NULL ,
-  PRIMARY KEY (`id`) ,
-  INDEX `fk_user_idx` (`from` ASC) ,
-  CONSTRAINT `fk_user`
-    FOREIGN KEY (`from` )
-    REFERENCES `sharing`.`user` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1
-COLLATE = latin1_general_ci;
-
 -- -----------------------------------------------------
 -- Table `sharing`.`group`
 -- -----------------------------------------------------
@@ -98,12 +74,7 @@ CREATE  TABLE IF NOT EXISTS `sharing`.`group` (
   `description` VARCHAR(200) NULL ,
   `owner_id` INT NULL ,
   PRIMARY KEY (`id`) ,
-  INDEX `fk_user_group_idx` (`id` ASC) ,
-  CONSTRAINT `fk_user_group`
-    FOREIGN KEY (`id` )
-    REFERENCES `sharing`.`userGroup` (`group_id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  INDEX `fk_user_group_idx` (`id` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_general_ci;
@@ -195,30 +166,6 @@ CREATE  TABLE IF NOT EXISTS `sharing`.`groupAssetShare` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_general_cs;
-
-
--- -----------------------------------------------------
--- Table `sharing`.`courseUniversity`
--- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `sharing`.`courseUniversity` (
-  `course_id` INT NOT NULL ,
-  `university_id` INT NOT NULL COMMENT '	' ,
-  PRIMARY KEY (`course_id`, `university_id`) ,
-  INDEX `fk_course_university_1_idx` (`university_id` ASC) ,
-  INDEX `fk_course_university_1_idx1` (`course_id` ASC) ,
-  CONSTRAINT `fk_university_courseUniversity`
-    FOREIGN KEY (`university_id` )
-    REFERENCES `sharing`.`university` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_course_courseUniversity`
-    FOREIGN KEY (`course_id` )
-    REFERENCES `sharing`.`course` (`id` )
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = latin1
-COLLATE = latin1_general_ci;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
