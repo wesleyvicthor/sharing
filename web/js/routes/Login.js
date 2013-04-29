@@ -1,4 +1,4 @@
-define(['views/RegisterTeacher', 'views/Login', 'views/Alert'], function (RegisterTeacherView, LoginView, AlertView) {
+define(['views/RegisterTeacher', 'views/Login', 'views/Alert', 'views/Activate'], function (RegisterTeacherView, LoginView, AlertView, ActivateView) {
     return Backbone.Router.extend({
         routes: {
             'register-teacher': 'displayRegisterTeacherView',
@@ -11,12 +11,8 @@ define(['views/RegisterTeacher', 'views/Login', 'views/Alert'], function (Regist
         },
 
         activateUser: function (token) {
-            console.log(token);
-
-            $.post(APP_PATH + 'activate/'+token, function (response) {
-                var message = (response.fail == undefined ) ? response.success : response.fail;
-                (new AlertView({ level: 'Info', message: message })).render();
-            });
+            var ActivateModel = Backbone.Model.extend({});
+            new ActivateView({ model: new ActivateModel({ token: token }) });
         },
 
         displayRegisterTeacherView: function () {

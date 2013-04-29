@@ -16,7 +16,7 @@ implements AuthenticationSuccessHandlerInterface,
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
         if ($request->isXmlHttpRequest()) {
-            return new JsonResponse(array('usermail' => $token->getUser()->getUsername()));
+            return new JsonResponse(array('username' => $token->getUser()->getUsername()));
         }
         return new JsonResponse(array(), 400);
     }
@@ -24,7 +24,11 @@ implements AuthenticationSuccessHandlerInterface,
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
     {
         if ($request->isXmlHttpRequest()) {
-            return new JsonResponse(array('fail' => $exception->getMessage()));
+            $message = $exception->getMessage();
+            if ('Bad credentials' == $message) {
+                $message = 'Email ou Senha inválida!';
+            }
+            return new JsonResponse(array('fail' => $message));
         }
         return new JsonResponse(array(), 400);
     }

@@ -26,7 +26,7 @@ class DefaultController extends Controller
 
     public function searchUniversityAction()
     {
-        $mapper = $this->get('mapper');
+        $mapper = $this->getMapper();
         $name = $this->getRequest()->query->get('q');
 
         $searchResult = $mapper->university(array('name LIKE' => "%{$name}%"))->fetchAll();
@@ -83,7 +83,7 @@ class DefaultController extends Controller
         $emails = explode(';', $emails);
         $filteredEmails = $this->handleEmailList($emails);
 
-        $mapper = $this->get('mapper');
+        $mapper = $this->getMapper();
 
         $group = new Group();
         $group->name = $groupName;
@@ -112,10 +112,10 @@ class DefaultController extends Controller
 
     protected function createUserGroup($email, $groupId, $universityId, $courseId)
     {
-        $mapper = $this->get('mapper');
+        $mapper = $this->getMapper();
 
         $user = $email;
-        if (!$user instanceof \App\SharingBundle\Entities\User) {
+        if (!$user instanceof \StdClass) {
             $user = new User();
             $user->name = $user->email = $email;
             $user->university_id = $universityId;
@@ -154,7 +154,7 @@ class DefaultController extends Controller
         $registeredUsers = array();
         $newUsers = array();
 
-        $mapper = $this->get('mapper');
+        $mapper = $this->getMapper();
 
         foreach ($emails as $email) {
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -198,7 +198,7 @@ class DefaultController extends Controller
         $course->name = $courseName;
         $course->university_id = $universityId;
 
-        $mapper = $this->get('mapper');
+        $mapper = $this->getMapper();
         $mapper->course->persist($course);
         $mapper->flush();
 
@@ -210,7 +210,7 @@ class DefaultController extends Controller
         $university = new University();
         $university->name = $universityName;
 
-        $mapper = $this->get('mapper');
+        $mapper = $this->getMapper();
         $mapper->university->persist($university);
         $mapper->flush();
 
@@ -219,15 +219,15 @@ class DefaultController extends Controller
 
     protected function userExists($email)
     {
-        $mapper = $this->get('mapper');
+        $mapper = $this->getMapper();
         return $mapper->user(array('email' => $email))
-            ->fetch('\\App\\SharingBundle\\Entities\\User');
+            ->fetch();
     }
 
     protected function sendUserEmailConfirm($user)
     {
         $email = $user;
-        if ($user instanceof \App\SharingBundle\Entities\User) {
+        if ($user instanceof \StdClass) {
             $email = $user->email;
         }
 
@@ -243,5 +243,12 @@ class DefaultController extends Controller
             );
 
         $this->get('mailer')->send($message);
+    }
+
+    protected function getMapper()
+    {
+        $mapper = $this->get('mapper');
+        $mapper->entityNamespace = '\\App\\SharingBundle\\Entities';
+        return $mapper;
     }
 }

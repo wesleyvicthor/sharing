@@ -53,6 +53,19 @@
             </form>
             <div class="register-teacher"><a data-uri="register-teacher" href="register-teacher">Sou Professor</a></div>
         </script>
+        <script type="text/template" id="activate">
+            <form method="post" name="activate">
+                <fieldset>
+                    <div class="input-wrapper">
+                        <input type="password" name="passw" placeholder="Senha"/>
+                    </div>
+                    <div class="input-wrapper">
+                        <input type="password" name="passw-check" placeholder="Confirme a senha" />
+                    </div>
+                    <input type="submit" value="Entrar" />
+                </fieldset>
+            </form>
+        </script>
         <script type="text/template" id="register-teacher">
             <form method="post" name="register-teacher">
                 <fieldset>
@@ -113,7 +126,7 @@
             </div>
             <div class="user-info">
                 <div class="user-photo icon-user"></div>
-                <span class="user-name">{{ app.user.username }}</span>
+                <span class="user-name"><%= username %></span>
                 <!--<div class="user-settings icon-user-config"></div>-->
             </div>
             <div id="stage-container">

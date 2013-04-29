@@ -26,6 +26,10 @@ security:
             pattern:  ^/login$
             security: false
 
+        preauth:
+            pattern: ^/(activate|search-university|search-course)
+            security: false
+
         secured_area:
             pattern:    ^/
             form_login:

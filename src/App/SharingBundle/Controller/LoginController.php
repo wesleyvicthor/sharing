@@ -25,16 +25,35 @@ class LoginController extends DefaultController
         $email = base64_decode($token);
         $user = $this->userExists($email);
 
+        $request = $this->getRequest()->request;
+        $passw = trim($request->get('passw'));
+
+        if (empty($passw)) {
+            return new JsonResponse(array('fail' => 'Campo senha não pode estar vazio!'));
+        }
+
+        if (!$user) {
+            return new JsonResponse(array('fail' => 'Não foi encontrado usuário para o token: ' . $token));
+        }
+
         if ($user->active == 1) {
             return new JsonResponse(array('fail' => 'Usuário já ativo.'));
         }
 
-        if (!$user) {
-            return new JsonResponse(array('fail' => 'Não foi encontrado usuário para o token.'));
+        $passwCheck = trim($request->get('passw-check'));
+
+        if ($passw != $passwCheck) {
+            return new JsonResponse(array('fail' => 'Senhas digitas não são iguais.'));
         }
 
-        $mapper = $this->get('mapper');
+        if (strlen($passw) < 8) {
+            return new JsonResponse(array('fail' => 'A senha deve conter no mínimo 8 caracteres.'));
+        }
+
+
+        $mapper = $this->getMapper();
         $user->active = 1;
+        $user->passw = $passw;
         $mapper->user->persist($user);
         $mapper->flush();
 
@@ -87,7 +106,7 @@ class LoginController extends DefaultController
         $teacher->university_id = $universityId;
         $teacher->passw = $passw;
 
-        $mapper = $this->get('mapper');
+        $mapper = $this->getMapper();
         $mapper->user->persist($teacher);
         $mapper->flush();
 

@@ -26,11 +26,19 @@ define(['backbone', 'underscore', 'views/Alert', 'routes/Login'], function (Back
 
         handleAuth: function (response) {
             if (response.fail) {
-                return (new Alert({ level: 'Atenção', message: 'Login ou Senha inválida!' })).render();
+                return (new Alert({ level: 'Atenção', message: response.fail })).render();
             }
 
+            Sharing.User = {
+                username: response.username,
+                roles: response.userRoles,
+                isTeacher: function () {
+                    var role = response.userRoles[0];
+                    return  role == 'TEACHER';
+                }
+            };
             Sharing.Router.Home.navigate('homepage', { trigger: true });
-            (new Alert({ level: 'Sucesso', message: 'Bem Vindo ' + response.usermail })).render()
+            (new Alert({ level: 'Sucesso', message: 'Bem Vindo ' + Sharing.User.username })).render()
         }
     });
 });

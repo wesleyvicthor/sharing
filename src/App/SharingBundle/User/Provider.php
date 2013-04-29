@@ -14,6 +14,7 @@ class Provider implements UserProviderInterface
 
     public function setMapper(Mapper $mapper) {
         $this->mapper = $mapper;
+        $this->mapper->entityNamespace = '\App\SharingBundle\Entities';
     }
 
     public function loadUserByUsername($userEmail)
@@ -23,7 +24,14 @@ class Provider implements UserProviderInterface
         }
 
         $user = $this->mapper->user(array('email' => $userEmail))
-            ->fetch('\App\SharingBundle\Entities\User');
+            ->fetch();
+
+        if ($user && isset($user->active)) {
+            if ($user->active == 0) {
+                // enviar email com link para ativação.
+                throw new \Exception('Usuário precisa ser ativado.');
+            }
+        }
 
         if (!$user) {
             throw new UsernameNotFoundException(sprintf('Unable to find an active identified by "%s".', $userEmail));
