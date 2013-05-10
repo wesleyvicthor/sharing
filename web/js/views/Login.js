@@ -34,7 +34,7 @@ define(['backbone', 'underscore', 'views/Alert', 'routes/Login'], function (Back
                 roles: response.userRoles,
                 isTeacher: function () {
                     var role = response.userRoles[0];
-                    return  role == 'TEACHER';
+                    return  role == 'ROLE_TEACHER';
                 }
             };
             Sharing.Router.Home.navigate('homepage', { trigger: true });

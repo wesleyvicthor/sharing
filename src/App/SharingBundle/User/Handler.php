@@ -16,7 +16,10 @@ implements AuthenticationSuccessHandlerInterface,
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
         if ($request->isXmlHttpRequest()) {
-            return new JsonResponse(array('username' => $token->getUser()->getUsername()));
+            $user = $token->getUser();
+            return new JsonResponse(
+                array('username' => $user->getUsername(), 'userRoles' => $user->getRoles())
+            );
         }
         return new JsonResponse(array(), 400);
     }

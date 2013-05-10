@@ -8,7 +8,7 @@ define(['backbone', 'underscore', 'views/Alert', 'autocomplete'], function (Back
         },
 
         initialize: function () {
-            $('.section-name').html('Cadastrar Turma')
+            $('.section-name').html('Cadastrar Turma');
             this.autocompleteConfig = {
                 dataType: 'json',
                 paramName: 'q',

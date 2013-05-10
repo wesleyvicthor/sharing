@@ -1,10 +1,11 @@
-define(['backbone', 'views/RegisterGroup', 'jquery-ui'], function (Backbone, RegisterGroupView) {
+define(['backbone', 'views/RegisterGroup', 'views/Files' ,'jquery-ui'], function (Backbone, RegisterGroupView, FilesView) {
     return Backbone.View.extend({
         template: $('script#homepage').html(),
         events: {
             'click .menu-bar ul li': 'handleMenu',
-            'click a[href=#register-group]': 'displayRegisterGroup'
-
+            'click a[href=#register-group]': 'displayRegisterGroup',
+            'click a[href=#files]': 'displayFiles',
+            'click a[href=#groups]': 'displayGroups'
         },
         
         initialize: function () {
@@ -15,6 +16,14 @@ define(['backbone', 'views/RegisterGroup', 'jquery-ui'], function (Backbone, Reg
             var tabIndex = this.$('#stage-container').tabs('option', 'active');
             this.$('ul.menu-bar li').removeClass('active');
             $(this.$('ul.menu-bar li').get(tabIndex)).addClass('active');
+        },
+
+        displayGroups: function () {
+            // !!
+        },
+ 
+        displayFiles: function () {
+            new FilesView();
         },
 
         displayRegisterGroup: function () {
