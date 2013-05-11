@@ -1,4 +1,4 @@
-define(['backbone', 'views/RegisterGroup', 'views/Files' ,'jquery-ui'], function (Backbone, RegisterGroupView, FilesView) {
+define(['backbone', 'views/RegisterGroup', 'views/Files', 'views/Groups', 'jquery-ui'], function (Backbone, RegisterGroupView, FilesView, GroupsView) {
     return Backbone.View.extend({
         template: $('script#homepage').html(),
         events: {
@@ -19,7 +19,7 @@ define(['backbone', 'views/RegisterGroup', 'views/Files' ,'jquery-ui'], function
         },
 
         displayGroups: function () {
-            // !!
+            new GroupsView();
         },
  
         displayFiles: function () {
