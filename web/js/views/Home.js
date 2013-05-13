@@ -1,4 +1,12 @@
-define(['backbone', 'views/RegisterGroup', 'views/Files', 'views/Groups', 'jquery-ui'], function (Backbone, RegisterGroupView, FilesView, GroupsView) {
+define([
+    'backbone',
+    'views/RegisterGroup',
+    'views/Files',
+    'views/Groups',
+    'collections/Group',
+    'views/User',
+    'jquery-ui'
+], function (Backbone, RegisterGroupView, FilesView, GroupsView, GroupCollection, UserView) {
     return Backbone.View.extend({
         template: $('script#homepage').html(),
         events: {
@@ -7,9 +15,10 @@ define(['backbone', 'views/RegisterGroup', 'views/Files', 'views/Groups', 'jquer
             'click a[href=#files]': 'displayFiles',
             'click a[href=#groups]': 'displayGroups'
         },
-        
+
         initialize: function () {
             this.render();
+            new UserView({model: Sharing.User});
         },
 
         handleMenu: function () {
@@ -19,7 +28,8 @@ define(['backbone', 'views/RegisterGroup', 'views/Files', 'views/Groups', 'jquer
         },
 
         displayGroups: function () {
-            new GroupsView();
+            $('#groups').empty();
+            new GroupsView(new GroupCollection());
         },
  
         displayFiles: function () {

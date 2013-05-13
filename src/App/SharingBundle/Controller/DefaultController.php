@@ -24,6 +24,28 @@ class DefaultController extends Controller
         return $this->redirect($this->generateUrl('app_sharing_homepage'));
     }
 
+    public function groupsAction()
+    {
+        $mapper = $this->get('mapper');
+        $groups = $mapper->userGroup(
+            $mapper->groups
+        )->fetchAll();
+
+        var_dump($this->getUser()->getId());
+        foreach($groups as $group) {
+            var_dump($group);die;
+        }
+        die;
+        $group = array('name' => 'Wesley Victhor Mendes', 'photo' => 'sp');
+        $data = array(
+            array('name' => 'Unifieo', 'list' => array($group, $group)),
+            array('name' => 'UNIP', 'list' => array($group, $group, $group)),
+            array('name' => 'USP', 'list' => array($group, $group, $group, $group)),
+        );
+
+        return new JsonResponse($data);
+    }
+
     public function searchUniversityAction()
     {
         $mapper = $this->getMapper();
@@ -88,7 +110,7 @@ class DefaultController extends Controller
         $group = new Group();
         $group->name = $groupName;
         $group->owner_id = $this->getUser()->getId();
-        $mapper->{'`group`'}->persist($group);
+        $mapper->groups->persist($group);
         $mapper->flush();
 
         if (!$group->id) {

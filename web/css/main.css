@@ -243,6 +243,7 @@ nav.menu-bar ul li:hover {
     width: 16em;
     height: 16em;
     background-color: #00a256;
+    position: relative;
 }
 .group-box ul {
     margin: 0;
@@ -279,4 +280,7 @@ nav.menu-bar ul li:hover {
     font-weight: lighter;
     font-size: 2.3em;
     color: #333;
+    position: absolute;
+    bottom: 0px;
+    margin-bottom: 5px;
 }

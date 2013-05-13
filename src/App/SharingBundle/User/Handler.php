@@ -18,7 +18,7 @@ implements AuthenticationSuccessHandlerInterface,
         if ($request->isXmlHttpRequest()) {
             $user = $token->getUser();
             return new JsonResponse(
-                array('username' => $user->getUsername(), 'userRoles' => $user->getRoles())
+                array('username' => $user->getUsername(), 'userRoles' => $user->getRoles(), 'id' => $user->getId())
             );
         }
         return new JsonResponse(array(), 400);

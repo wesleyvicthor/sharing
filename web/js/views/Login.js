@@ -30,6 +30,7 @@ define(['backbone', 'underscore', 'views/Alert', 'routes/Login'], function (Back
             }
 
             Sharing.User = {
+                id: response.id,
                 username: response.username,
                 roles: response.userRoles,
                 isTeacher: function () {

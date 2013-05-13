@@ -1,21 +1,17 @@
 define(['backbone', 'underscore'], function (Backbone, _) {
     return Backbone.View.extend({
-        className: 'group-box',
-
-        initialize: function (collection) {
-            this.collection = collection;
+        initialize: function (model) {
+            this.model = model;
             this.render();
         },
 
         render: function () {
             var listItems = '';
-            _.each(this.collection, function (user) {
-                listItems += '<li><div class="user-photo">'+user.get('photo')+'</div><div class="user-name">'+user.get('name')+'</div></li>';
+            _.each(this.model.get('list'), function (user) {
+                listItems += '<li><div class="user-photo">'+user.photo+'</div><div class="user-name">'+user.name+'</div></li>';
             });
-
             var list = '<ul>'+listItems+'</ul>';
-            this.$el.html(list);
-            return this;
+            return '<div class="group-box">'+list+'<h2 class="group-name">'+this.model.get('name')+'</h2></div>';
         }
     });
 });
