@@ -27,7 +27,7 @@ security:
             security: false
 
         preauth:
-            pattern: ^/(activate|search-university|search-course)
+            pattern: ^/(activate|search-university|search-course|register-group|register-teacher)
             security: false
 
         secured_area:
