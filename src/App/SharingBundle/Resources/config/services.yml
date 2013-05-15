@@ -22,6 +22,7 @@ services:
         class: %user.provider.class%
         calls:
             - [setMapper, [@mapper]]
+            - [setContainer, [@service_container]]
 
     authentication.handler:
         class: %authentication.handler.class%

@@ -12,7 +12,11 @@ define(['backbone', 'underscore', 'views/Alert'], function (Backbone, _, AlertVi
         submit: function (event) {
             event.preventDefault();
             var params = this.$('form').serialize();
-            $.post(APP_PATH + 'activate/'+this.model.get('token'), params, function (response) {
+            this.sendToken(this.model.get('token'), params);
+        },
+
+        sendToken: function (token, params) {
+            $.post(APP_PATH + 'activate/'+token, params, function (response) {
                 if (response.fail != undefined) {
                     (new AlertView({ level: 'Info', message: response.fail })).render();
                     return;    
@@ -24,6 +28,11 @@ define(['backbone', 'underscore', 'views/Alert'], function (Backbone, _, AlertVi
         },
 
         render: function () {
+            var token = this.model.get('token');
+            if (token.indexOf('.') !== -1) {
+                this.sendToken(token);
+                return;
+            }
             this.$el.html(_.template(this.template));
             $('.login-container').html(this.$el.fadeIn('fast'));
             return this;

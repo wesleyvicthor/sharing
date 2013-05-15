@@ -106,10 +106,9 @@ class DefaultController extends Controller
         $filteredEmails = $this->handleEmailList($emails);
 
         $mapper = $this->getMapper();
-
         $group = new Group();
         $group->name = $groupName;
-        $group->owner_id = $this->getUser()->getId();
+        $group->owner_id = $this->get('session')->get('user.id');
         $mapper->groups->persist($group);
         $mapper->flush();
 
@@ -150,6 +149,7 @@ class DefaultController extends Controller
             if (!$user->id) {
                 return false;
             }
+            // it must return true or false to validate email sent.
             $this->sendUserEmailConfirm($user->email);
         }
 
@@ -253,18 +253,26 @@ class DefaultController extends Controller
             $email = $user->email;
         }
 
-        $message = \Swift_Message::newInstance();
-        $message->setSubject('Sharing no reply')
-            ->setFrom('noreplay@sharing.com')
-            ->setTo($email)
-            ->setBody(
-                sprintf(
-                    "Click no link para ativar o cadastro %s",
-                    'http://sharing.com/activate?token=' . base64_encode($email)
-                )
-            );
+        $token = base64_encode($email);
+        if (isset($user->type) && $user->type == 'TEACHER') {
+            $token .= '.' . base64_encode('TEACHER');
+        }
 
-        $this->get('mailer')->send($message);
+        try {
+            $message = \Swift_Message::newInstance();
+            $message->setSubject('Sharing no reply')
+                ->setFrom('noreplay@sharing.com')
+                ->setTo($email)
+                ->setBody(
+                    sprintf(
+                        "Click no link para ativar o cadastro http://sharing.com/activate?token=%s",
+                        $token
+                    )
+                );
+            $this->get('mailer')->send($message);
+        } catch (\Exception $e) {
+               
+        }
     }
 
     protected function getMapper()

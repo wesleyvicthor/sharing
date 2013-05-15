@@ -22,15 +22,15 @@ class LoginController extends DefaultController
         if (empty($token)) {
             return new JsonResponse(array('fail' => 'Token de confirmação inválido.'));
         }
+
+        $userType = 'STUDENT';
+        if (strpos($token, '.') !== false) {
+            list($token, $type) = explode('.', $token);
+            $userType = base64_decode($type);
+        }
+
         $email = base64_decode($token);
         $user = $this->userExists($email);
-
-        $request = $this->getRequest()->request;
-        $passw = trim($request->get('passw'));
-
-        if (empty($passw)) {
-            return new JsonResponse(array('fail' => 'Campo senha não pode estar vazio!'));
-        }
 
         if (!$user) {
             return new JsonResponse(array('fail' => 'Não foi encontrado usuário para o token: ' . $token));
@@ -38,6 +38,21 @@ class LoginController extends DefaultController
 
         if ($user->active == 1) {
             return new JsonResponse(array('fail' => 'Usuário já ativo.'));
+        }
+
+        if ($userType == 'TEACHER') {
+            $user->active = 1;
+            $mapper = $this->getMapper();
+            $mapper->user->persist($user);
+            $mapper->flush();
+            return new JsonResponse(array('success' => "{$email} Ativado com sucesso!"));
+        }
+
+        $request = $this->getRequest()->request;
+        $passw = trim($request->get('passw'));
+
+        if (empty($passw)) {
+            return new JsonResponse(array('fail' => 'Campo senha não pode estar vazio!'));
         }
 
         $passwCheck = trim($request->get('passw-check'));
@@ -50,8 +65,6 @@ class LoginController extends DefaultController
             return new JsonResponse(array('fail' => 'A senha deve conter no mínimo 8 caracteres.'));
         }
 
-
-        $mapper = $this->getMapper();
         $user->active = 1;
         $user->passw = $passw;
         $mapper->user->persist($user);
