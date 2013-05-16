@@ -26,16 +26,16 @@ class DefaultController extends Controller
 
     public function groupsAction()
     {
-        $mapper = $this->get('mapper');
-        $groups = $mapper->userGroup(
-            $mapper->groups
-        )->fetchAll();
+        // $mapper = $this->get('mapper');
+        // $groups = $mapper->userGroup(
+        //     $mapper->groups
+        // )->fetchAll();
 
-        var_dump($this->getUser()->getId());
-        foreach($groups as $group) {
-            var_dump($group);die;
-        }
-        die;
+        // var_dump($this->getUser()->getId());
+        // foreach($groups as $group) {
+        //     var_dump($group);die;
+        // }
+        // die;
         $group = array('name' => 'Wesley Victhor Mendes', 'photo' => 'sp');
         $data = array(
             array('name' => 'Unifieo', 'list' => array($group, $group)),

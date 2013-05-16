@@ -68,13 +68,13 @@ COLLATE = latin1_general_ci;
 -- -----------------------------------------------------
 -- Table `sharing`.`group`
 -- -----------------------------------------------------
-CREATE  TABLE IF NOT EXISTS `sharing`.`group` (
+CREATE  TABLE IF NOT EXISTS `sharing`.`groups` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(155) NULL ,
   `description` VARCHAR(200) NULL ,
   `owner_id` INT NULL ,
   PRIMARY KEY (`id`) ,
-  INDEX `fk_user_group_idx` (`id` ASC))
+  INDEX `fk_user_groups_idx` (`id` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = latin1
 COLLATE = latin1_general_ci;
@@ -84,11 +84,11 @@ COLLATE = latin1_general_ci;
 -- Table `sharing`.`userGroup`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `sharing`.`userGroup` (
-  `group_id` INT NOT NULL AUTO_INCREMENT,
+  `groups_id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL ,
   `university_id` INT NOT NULL,
   `course_id` INT NOT NULL,
-  PRIMARY KEY (`group_id`, `user_id`, `university_id`, `course_id`) ,
+  PRIMARY KEY (`groups_id`, `user_id`, `university_id`, `course_id`) ,
   INDEX `fk_user_group_1_idx` (`user_id` ASC) ,
   CONSTRAINT `fk_user_userGroup`
     FOREIGN KEY (`user_id` )
@@ -148,13 +148,13 @@ COLLATE = latin1_general_ci;
 -- Table `sharing`.`groupAssetShare`
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS `sharing`.`groupAssetShare` (
-  `group_id` INT NOT NULL ,
+  `groups_id` INT NOT NULL ,
   `asset_id` INT NOT NULL ,
-  PRIMARY KEY (`group_id`, `asset_id`) ,
-  INDEX `fk_group_idx` (`group_id` ASC) ,
+  PRIMARY KEY (`groups_id`, `asset_id`) ,
+  INDEX `fk_groups_idx` (`groups_id` ASC) ,
   INDEX `fk_asset_idx` (`asset_id` ASC) ,
   CONSTRAINT `fk_group`
-    FOREIGN KEY (`group_id` )
+    FOREIGN KEY (`groups_id` )
     REFERENCES `sharing`.`group` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
