@@ -35,6 +35,7 @@ define(['backbone', 'underscore', 'views/Alert'], function (Backbone, _, AlertVi
             }
             this.$el.html(_.template(this.template));
             $('.login-container').html(this.$el.fadeIn('fast'));
+            (new AlertView({ level: 'Info', message: 'Para ativar seu acesso cadastre uma senha\ncom no mínimo 8 caracteres.' })).render()
             return this;
         }
     });

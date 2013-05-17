@@ -65,6 +65,7 @@ class LoginController extends DefaultController
             return new JsonResponse(array('fail' => 'A senha deve conter no mínimo 8 caracteres.'));
         }
 
+        $mapper = $this->getMapper();
         $user->active = 1;
         $user->passw = $passw;
         $mapper->user->persist($user);

@@ -36,6 +36,7 @@ class DefaultController extends Controller
         //     var_dump($group);die;
         // }
         // die;
+        // select g.name, u.name from user u INNER JOIN userGroup ug ON u.id = ug.user_id RIGHT JOIN groups g ON g.id = ug.groups_id where u.id = 4 or g.owner_id =4
         $group = array('name' => 'Wesley Victhor Mendes', 'photo' => 'sp');
         $data = array(
             array('name' => 'Unifieo', 'list' => array($group, $group)),
@@ -154,7 +155,7 @@ class DefaultController extends Controller
         }
 
         $userGroup = new UserGroup();
-        $userGroup->group_id = $groupId;
+        $userGroup->groups_id = $groupId;
         $userGroup->user_id = $user->id;
         $userGroup->university_id = $universityId;
         $userGroup->course_id = $courseId;

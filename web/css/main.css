@@ -242,7 +242,7 @@ nav.menu-bar ul li:hover {
     margin: 0.5em;
     width: 16em;
     height: 16em;
-    background-color: #00a256;
+    background-color: rgba(0, 117, 133, 0.65);
     position: relative;
 }
 .group-box ul {
@@ -258,7 +258,7 @@ nav.menu-bar ul li:hover {
 }
 
 .group-box ul li:hover {
-    background: #009a52;
+    background: rgb(0, 117, 133);
 }
 
 .group-box .user-photo,
@@ -273,7 +273,13 @@ nav.menu-bar ul li:hover {
 }
 
 .group-box .user-name {
-    margin: 6px 0 0 8px;
+    margin: 2px 0 0 8px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 1.3em;
+    width: 155px;
+    font-weight: lighter;
 }
 
 .group-box h2.group-name {
