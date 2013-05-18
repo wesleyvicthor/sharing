@@ -26,25 +26,42 @@ class DefaultController extends Controller
 
     public function groupsAction()
     {
-        // $mapper = $this->get('mapper');
-        // $groups = $mapper->userGroup(
-        //     $mapper->groups
-        // )->fetchAll();
+        $mapper = $this->getMapper();
+        $userId = $this->getUser()->getId();
+        $loggedUser = $mapper->user(array('id' => $userId))->fetch();
 
-        // var_dump($this->getUser()->getId());
-        // foreach($groups as $group) {
-        //     var_dump($group);die;
-        // }
-        // die;
-        // select g.name, u.name from user u INNER JOIN userGroup ug ON u.id = ug.user_id RIGHT JOIN groups g ON g.id = ug.groups_id where u.id = 4 or g.owner_id =4
-        $group = array('name' => 'Wesley Victhor Mendes', 'photo' => 'sp');
-        $data = array(
-            array('name' => 'Unifieo', 'list' => array($group, $group)),
-            array('name' => 'UNIP', 'list' => array($group, $group, $group)),
-            array('name' => 'USP', 'list' => array($group, $group, $group, $group)),
-        );
+        $userGroups = $mapper->userGroup($mapper->groups, array('user_id' => $userId))
+            ->fetchAll();
+            // select g.name from groups g LEFT JOIN userGroup ug ON g.id = ug.groups_id where g.owner_id = 1 group by g.id;
+            // get groups by owner
+        var_dump($userGroups);die;
+        $groups = array();
+        foreach ($userGroups as $group) {
+            $usersGroup = $mapper->userGroup(
+                $mapper->user,
+                array(
+                    'groups_id' => $group->groups_id->id,
+                    'university_id' => $loggedUser->university_id,
+                    'course_id' => $loggedUser->course_id,
+                    'user_id !=' => $userId
+                )
+            )->fetchAll();
 
-        return new JsonResponse($data);
+            $users = array();
+            foreach ($usersGroup as $userGroup) {
+                $users[] = array(
+                    'name' => $userGroup->user_id->name,
+                    'photo' => ''
+                );
+            }
+
+            $groups[] = array(
+                'name' => $group->groups_id->name,
+                'list' => $users
+            );
+        }
+
+        return new JsonResponse($groups);
     }
 
     public function searchUniversityAction()
