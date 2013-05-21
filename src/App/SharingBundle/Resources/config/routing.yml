@@ -10,6 +10,12 @@ app_sharing_groups:
     pattern:  /groups
     defaults: { _controller: AppSharingBundle:Default:groups }
 
+app_sharing_group:
+    pattern:  /group/{id}
+    defaults: { _controller: AppSharingBundle:Default:group }
+    requirements:
+        _method: POST
+
 app_sharing_register_teacher_view:
     pattern:  /register-teacher
     defaults: { _controller: AppSharingBundle:Login:index }

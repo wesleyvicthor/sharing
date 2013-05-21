@@ -290,3 +290,40 @@ nav.menu-bar ul li:hover {
     bottom: 0px;
     margin-bottom: 5px;
 }
+
+#files table {
+    width: 100%;
+    font-family: Ubuntu Condensed;
+    color: #fff;
+}
+
+#files table thead th {
+    text-align: left;
+}
+
+#files table tr td:last-child,
+#files table tr th:last-child {
+    text-align: right;
+    padding-right: 1em;
+}
+
+#files .file-icon {
+    width: 9em;
+}
+
+#files .file-row td {
+    padding: 2em 0em 2em 0em;
+}
+
+#files .file-row {
+    border-bottom: 1px solid #fff;
+    border-color: rgba(255, 255, 255, 0.25); 
+}
+
+#files .file-row .highlight {
+    font-size: 2em;
+}
+
+#files .file-row:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}

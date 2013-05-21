@@ -11,6 +11,7 @@ use App\SharingBundle\Entities\Course;
 use App\SharingBundle\Entities\Teacher;
 use App\SharingBundle\Entities\UserGroup;
 use App\SharingBundle\Entities\University;
+use Respect\Relational\Sql;
 
 class DefaultController extends Controller
 {
@@ -32,9 +33,12 @@ class DefaultController extends Controller
 
         $userGroups = $mapper->userGroup($mapper->groups, array('user_id' => $userId))
             ->fetchAll();
-            // select g.name from groups g LEFT JOIN userGroup ug ON g.id = ug.groups_id where g.owner_id = 1 group by g.id;
-            // get groups by owner
-        var_dump($userGroups);die;
+
+        $ownerGroups = $mapper->userGroup($mapper->groups(array('owner_id' => $userId)))->fetchAll(Sql::groupBy('groups.id'));
+
+        // select g.name from groups g LEFT JOIN userGroup ug ON g.id = ug.groups_id where g.owner_id = 1 group by g.id;
+        // get groups by owner
+        $userGroups = array_merge($userGroups, $ownerGroups);
         $groups = array();
         foreach ($userGroups as $group) {
             $usersGroup = $mapper->userGroup(
@@ -43,7 +47,7 @@ class DefaultController extends Controller
                     'groups_id' => $group->groups_id->id,
                     'university_id' => $loggedUser->university_id,
                     'course_id' => $loggedUser->course_id,
-                    'user_id !=' => $userId
+                    'user_id <>' => $userId
                 )
             )->fetchAll();
 
@@ -56,12 +60,24 @@ class DefaultController extends Controller
             }
 
             $groups[] = array(
+                'owner' => ($group->groups_id->owner_id == $userId),
+                'id' => (int) $group->groups_id->id,
                 'name' => $group->groups_id->name,
                 'list' => $users
             );
         }
 
         return new JsonResponse($groups);
+    }
+
+    public function groupAction($id)
+    {
+        $mapper = $this->getMapper();
+        $group = $mapper->groups(array('id' => $id))->fetch();
+        $group->name = $this->getRequest()->request->get('name');
+        $mapper->groups->persist($group);
+        $mapper->flush();
+        return new  JsonResponse(array('success' => 'Nome do grupo atualizado.'));
     }
 
     public function searchUniversityAction()

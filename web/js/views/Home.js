@@ -5,8 +5,9 @@ define([
     'views/Groups',
     'collections/Group',
     'views/User',
+    'collections/File',
     'jquery-ui'
-], function (Backbone, RegisterGroupView, FilesView, GroupsView, GroupCollection, UserView) {
+], function (Backbone, RegisterGroupView, FilesView, GroupsView, GroupCollection, UserView, FileCollection) {
     return Backbone.View.extend({
         template: $('script#homepage').html(),
         events: {
@@ -18,6 +19,7 @@ define([
 
         initialize: function () {
             this.render();
+            this.displayGroups();
             new UserView({model: Sharing.User});
         },
 
@@ -33,7 +35,7 @@ define([
         },
  
         displayFiles: function () {
-            new FilesView();
+            new FilesView(new FileCollection());
         },
 
         displayRegisterGroup: function () {

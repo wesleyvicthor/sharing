@@ -6,12 +6,24 @@ define(['backbone', 'underscore'], function (Backbone, _) {
         },
 
         render: function () {
+            var self = this;
             var listItems = '';
             _.each(this.model.get('list'), function (user) {
                 listItems += '<li><div class="user-photo">'+user.photo+'</div><div class="user-name">'+user.name+'</div></li>';
             });
             var list = '<ul>'+listItems+'</ul>';
-            return '<div class="group-box">'+list+'<h2 class="group-name">'+this.model.get('name')+'</h2></div>';
+            var $groupBox = $('<div />');
+            var $groupName = $('<h2 class="group-name">').attr({
+                contenteditable: this.model.get('owner'),
+                'data-groupid': this.model.get('id')
+            }).text(this.model.get('name'));
+
+            $groupName.on('blur', function () {
+                self.model.set('name', $(this).text());
+            });
+
+            $groupBox.append($groupName.get(0));
+            return $groupBox.prepend(list).wrap('<div>').addClass('group-box');
         }
     });
 });
