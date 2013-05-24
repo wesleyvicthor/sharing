@@ -20,6 +20,27 @@ class DefaultController extends Controller
         return $this->render('AppSharingBundle:Default:homepage.html.twig');
     }
 
+    public function filesAction()
+    {
+        $date = new \DateTime('now');
+        $data = array(
+            array('fileicon' => 'icone', 'filetype' => 'pdf', 'filename' => 'my file', 'datetime' => $date->format('d/m/Y H:i:s')),
+            array('fileicon' => 'icone', 'filetype' => 'pdf', 'filename' => 'my file', 'datetime' => $date->format('d/m/Y H:i:s')),
+            array('fileicon' => 'icone', 'filetype' => 'pdf', 'filename' => 'my file', 'datetime' => $date->format('d/m/Y H:i:s')),
+            array('fileicon' => 'icone', 'filetype' => 'pdf', 'filename' => 'my file', 'datetime' => $date->format('d/m/Y H:i:s')),
+            array('fileicon' => 'icone', 'filetype' => 'pdf', 'filename' => 'my file', 'datetime' => $date->format('d/m/Y H:i:s')),
+            array('fileicon' => 'icone', 'filetype' => 'pdf', 'filename' => 'my file', 'datetime' => $date->format('d/m/Y H:i:s')),
+            array('fileicon' => 'icone', 'filetype' => 'pdf', 'filename' => 'my file', 'datetime' => $date->format('d/m/Y H:i:s'))
+        );
+
+        return new JsonResponse($data);
+    }
+
+    public function userAction()
+    {
+        
+    }
+
     public function redirectAction()
     {
         return $this->redirect($this->generateUrl('app_sharing_homepage'));

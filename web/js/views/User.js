@@ -1,9 +1,15 @@
 define(['backbone'], function (Backbone) {
 	return Backbone.View.extend({
 		events: {
-			'mouseover .user-photo': 'changePhotoHover',
-			'click .user-photo': 'changePhoto',
-			'click .user-name': 'changeName'
+			'mouseover .user-info .user-photo': 'changePhotoHover',
+			'click .user-info .user-photo': 'changePhoto',
+			'blur .user-info .user-name': 'changeName',
+			'dblclick .user-info .user-name': 'setEditable'
+		},
+
+		initialize: function (model) {
+			this.model = model;
+			this.render();
 		},
 
 		changePhotoHover: function (event) {
@@ -14,20 +20,19 @@ define(['backbone'], function (Backbone) {
 			console.log('alterar foto do usuário');
 		},
 
-		changeName: function () {
-			// content editable true!
+		setEditable: function (event) {
+			console.log(event, event.target);
+			$(event.target).attr({ contenteditable: true });
 		},
 
-		initialize: function () {
-			this.render();
+		changeName: function (event) {
+			this.model.set('name', $(event.target).text());
 		},
 
 		render: function () {
-            // <div class="user-settings icon-user-config"></div>
-            
             var userTemplate = '<div class="user-photo icon-user"></div>';
-            	userTemplate += '<span class="user-name">'+this.model.username+'</span>';
-            $('.user-info').html(userTemplate);
+            	userTemplate += '<span class="user-name">'+this.model.get('username')+'</span>';
+            $('.user-info').html(this.$el.html(userTemplate));
 		}
 	});
 });

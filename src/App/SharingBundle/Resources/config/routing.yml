@@ -10,6 +10,14 @@ app_sharing_groups:
     pattern:  /groups
     defaults: { _controller: AppSharingBundle:Default:groups }
 
+app_sharing_files:
+    pattern:  /files
+    defaults: { _controller: AppSharingBundle:Default:files }
+
+app_sharing_user:
+    pattern:  /user
+    defaults: { _controller: AppSharingBundle:Default:user }
+
 app_sharing_group:
     pattern:  /group/{id}
     defaults: { _controller: AppSharingBundle:Default:group }

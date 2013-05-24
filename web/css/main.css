@@ -295,6 +295,7 @@ nav.menu-bar ul li:hover {
     width: 100%;
     font-family: Ubuntu Condensed;
     color: #fff;
+    font-size: 1.4em;
 }
 
 #files table thead th {
@@ -312,7 +313,7 @@ nav.menu-bar ul li:hover {
 }
 
 #files .file-row td {
-    padding: 2em 0em 2em 0em;
+    padding: 1em 0em 1em 0em;
 }
 
 #files .file-row {
@@ -321,9 +322,10 @@ nav.menu-bar ul li:hover {
 }
 
 #files .file-row .highlight {
-    font-size: 2em;
+    font-size: 1.6em;
 }
 
 #files .file-row:hover {
     background-color: rgba(255, 255, 255, 0.25);
+    cursor: pointer;
 }

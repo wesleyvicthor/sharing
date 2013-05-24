@@ -1,5 +1,9 @@
 define(['backbone'], function (Backbone) {
     return Backbone.View.extend({
+        initialize: function (model) {
+            this.model = model;
+        },
+
         render: function () {
             var $row = $('<tr/>').addClass('file-row');
             $row.append(
@@ -9,11 +13,9 @@ define(['backbone'], function (Backbone) {
             ).append(
                 $('<td/>').text(this.model.get('filetype'))
             ).append(
-                $('<td/>').addClass('last-column').text(this.model.get('datetype'))
+                $('<td/>').addClass('last-column').text(this.model.get('datetime'))
             );
-
-            this.$el = $row;
-            return this.$el;
+            return $row;
         }
     });
 });
