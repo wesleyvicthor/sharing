@@ -1,38 +1,36 @@
 define(['backbone'], function (Backbone) {
-	return Backbone.View.extend({
-		events: {
-			'mouseover .user-info .user-photo': 'changePhotoHover',
-			'click .user-info .user-photo': 'changePhoto',
-			'blur .user-info .user-name': 'changeName',
-			'dblclick .user-info .user-name': 'setEditable'
-		},
+    return Backbone.View.extend({
 
-		initialize: function (model) {
-			this.model = model;
-			this.render();
-		},
+        initialize: function (model) {
+            this.model = model;
+            this.render();
+        },
 
-		changePhotoHover: function (event) {
-			$(event.target).text('Alterar foto');
-		},
+        changePhoto: function (self) {
+            return function (event) {
+                console.log('alterar foto do usuário');
+            }
+        },
 
-		changePhoto: function () {
-			console.log('alterar foto do usuário');
-		},
+        changeName: function (self) {
+            return function (event) {
+                self.model.set('username', $(event.target).text());
+            }
+        },
 
-		setEditable: function (event) {
-			console.log(event, event.target);
-			$(event.target).attr({ contenteditable: true });
-		},
+        render: function () {
+            var self = this;
+            var $userPhoto = $('<div />').addClass('user-photo icon-user');
+            $userPhoto.on('click', this.changePhoto(self));
 
-		changeName: function (event) {
-			this.model.set('name', $(event.target).text());
-		},
+            var $userName = $('<span />')
+                .addClass('user-name')
+                .attr({ contenteditable: true })
+                .text(this.model.get('username'));
 
-		render: function () {
-            var userTemplate = '<div class="user-photo icon-user"></div>';
-            	userTemplate += '<span class="user-name">'+this.model.get('username')+'</span>';
-            $('.user-info').html(this.$el.html(userTemplate));
-		}
-	});
+            $userName.on('blur', this.changeName(self));
+
+            $('.user-info').append($userPhoto).append($userName);
+        }
+    });
 });

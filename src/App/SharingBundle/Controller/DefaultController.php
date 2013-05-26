@@ -36,9 +36,16 @@ class DefaultController extends Controller
         return new JsonResponse($data);
     }
 
-    public function userAction()
+    public function userAction(Request $request)
     {
-        
+        $userId = $this->getUser()->getId();
+        $mapper = $this->getMapper();
+        $user = $mapper->user(array('id' => $userId))->fetch();
+        $user->name = $request->request->get('username');
+        $mapper->user->persist($user);
+        $mapper->flush();
+
+        return new JsonResponse(array('success' => 'Nome do usuário atualizado!'));
     }
 
     public function redirectAction()
