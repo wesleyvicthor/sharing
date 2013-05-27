@@ -15,11 +15,16 @@ define(['backbone', 'underscore', 'jquery'], function (Backbone, _, $) {
             this.$el.html(_.template($('script#alert-template').html())(this.model));
             $('.alert-wrapper').html(this.$el.fadeIn('fast'));
             this.delegateEvents();
+            setTimeout(this.closeAlert(this), 5000);
             return this;
         },
 
-        closeAlert: function () {
-            this.remove();
+        closeAlert: function (self) {
+            return function () {
+                self.$el.fadeOut('slow', function () {
+                    self.remove();
+                });
+            }
         }
     });
 });

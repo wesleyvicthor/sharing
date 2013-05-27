@@ -25,7 +25,7 @@ define(['backbone'], function (Backbone) {
 
             var $userName = $('<span />')
                 .addClass('user-name')
-                .attr({ contenteditable: true })
+                .attr({ contenteditable: true, spellcheck: false })
                 .text(this.model.get('username'));
 
             $userName.on('blur', this.changeName(self));

@@ -188,6 +188,7 @@ div.register-teacher {
     padding-top: 0.6em;
     float: left;
     color: #00a8ec;
+    outline: none;
 }
 
 .user-info div.user-settings {
@@ -270,6 +271,7 @@ nav.menu-bar ul li:hover {
     width: 25px;
     height: 25px;
     border: solid 1px;
+    border-color: rgba(255, 255, 255, 0.39);
 }
 
 .group-box .user-name {
@@ -289,6 +291,7 @@ nav.menu-bar ul li:hover {
     position: absolute;
     bottom: 0px;
     margin-bottom: 5px;
+    outline: none;
 }
 
 #files table {

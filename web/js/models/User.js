@@ -1,4 +1,4 @@
-define(['backbone'], function (Backbone) {
+define(['backbone', 'views/Alert'], function (Backbone, AlertView) {
 	return Backbone.Model.extend({
 		url: 'user',
 		defaults: {

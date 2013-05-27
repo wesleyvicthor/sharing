@@ -44,6 +44,7 @@ class Provider implements UserProviderInterface
         }
         $userWebservice = new Webservice($user->email, md5($user->passw), null, array('ROLE_'.$user->type));
         $userWebservice->setId($user->id);
+        $userWebservice->setUserOriginalName($user->name);
         $this->container->get('session')->set('user.id', $user->id);
         return $userWebservice;
     }

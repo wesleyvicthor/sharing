@@ -23,6 +23,11 @@
     background-position: -105px -350px;
 }
 
+.icon-user-small {
+    background: url('../../images/sharing-icons-sprite.png') no-repeat;
+    background-position: -42px -138px;
+    background-size: 190px 190px;
+}
 .icon-user-config {
     background: url('../../images/sharing-icons-sprite.png') no-repeat;
     background-position: -375px -165px;
